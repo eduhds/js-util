@@ -1,0 +1,20 @@
+{
+  "name": "js-util",
+  "version": "1.0.0",
+  "description": "JavaScript Util Codes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduhds/js-util.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eduhds/js-util/issues"
+  },
+  "homepage": "https://github.com/eduhds/js-util#readme"
+}
