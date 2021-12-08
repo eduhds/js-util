@@ -25,7 +25,18 @@ function formatMoneyBR(value) {
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 }
 
+/**
+ * Format Placa automotiva
+ * @param {string} value
+ * @returns {string}
+ */
+function formatPlacaOld(value) {
+  if (typeof value !== "string") throw new Error("Param is not a string");
+  return value.toUpperCase().replace(/([A-Z]{3})([0-9]{4})/, "$1-$2");
+}
+
 module.exports = {
   formatDateBR,
   formatMoneyBR,
+  formatPlacaOld,
 };
