@@ -17,7 +17,9 @@ function normalizeLower(text) {
  */
 function capitalize(text = "") {
   if (typeof text !== "string") throw new Error("Param is not a string");
-  return text.replace(/^\w/, (c) => c.toUpperCase());
+  return text.length > 1 
+    ? text.charAt(0).toUpperCase() + text.slice(1)
+    : text.toUpperCase();
 }
 
 /**
