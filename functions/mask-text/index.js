@@ -3,13 +3,13 @@
  * @param {string} text
  * @returns string
  */
-function maskCpf(text = "") {
+function maskCpf(text = '') {
   return text
-    .replace(/\D/g, "")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-    .replace(/(-\d{2})\d+?$/, "$1");
+    .replace(/\D/g, '')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+    .replace(/(-\d{2})\d+?$/, '$1');
 }
 
 /**
@@ -17,14 +17,14 @@ function maskCpf(text = "") {
  * @param {string} text
  * @returns string
  */
-function maskCnpj(text = "") {
+function maskCnpj(text = '') {
   return text
-    .replace(/\D/g, "")
-    .replace(/(\d{2})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d)/, "$1.$2")
-    .replace(/(\d{3})(\d)/, "$1/$2")
-    .replace(/(\d{4})(\d)/, "$1-$2")
-    .replace(/(-\d{2})\d+?$/, "$1");
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1/$2')
+    .replace(/(\d{4})(\d)/, '$1-$2')
+    .replace(/(-\d{2})\d+?$/, '$1');
 }
 
 /**
@@ -32,13 +32,13 @@ function maskCnpj(text = "") {
  * @param {string} text
  * @returns string
  */
-function maskPhone(text = "") {
+function maskPhone(text = '') {
   return text
-    .replace(/\D/g, "")
-    .replace(/(\d{2})(\d)/, "($1) $2")
-    .replace(/(\d{4})(\d)/, "$1-$2")
-    .replace(/(\d{4})-(\d)(\d{4})/, "$1$2-$3")
-    .replace(/(-\d{4})\d+?$/, "$1");
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '($1) $2')
+    .replace(/(\d{4})(\d)/, '$1-$2')
+    .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+    .replace(/(-\d{4})\d+?$/, '$1');
 }
 
 /**
@@ -46,11 +46,11 @@ function maskPhone(text = "") {
  * @param {string} text
  * @returns string
  */
-function maskCep(text = "") {
+function maskCep(text = '') {
   return text
-    .replace(/\D/g, "")
-    .replace(/(\d{5})(\d)/, "$1-$2")
-    .replace(/(-\d{3})\d+?$/, "$1");
+    .replace(/\D/g, '')
+    .replace(/(\d{5})(\d)/, '$1-$2')
+    .replace(/(-\d{3})\d+?$/, '$1');
 }
 
 /**
@@ -58,12 +58,12 @@ function maskCep(text = "") {
  * @param {string} text
  * @returns string
  */
-function maskDate(text = "") {
+function maskDate(text = '') {
   return text
-    .replace(/\D/g, "")
-    .replace(/(\d{2})(\d)/, "$1/$2")
-    .replace(/(\d{2})(\d)/, "$1/$2")
-    .replace(/(\d{4})\d+?$/, "$1");
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '$1/$2')
+    .replace(/(\d{2})(\d)/, '$1/$2')
+    .replace(/(\d{4})\d+?$/, '$1');
 }
 
 /**
@@ -71,16 +71,25 @@ function maskDate(text = "") {
  * @param {string} text
  * @returns string
  */
-function maskMoney(text = "") {
+function maskMoney(text = '') {
   return text
-    .replace(/\D/g, "")
-    .replace(/^(\d{1})$/g, "0,0$1")
-    .replace(/^(\d{2})$/g, "0,$1")
-    .replace(/^(\d{1,})(\d{2})$/g, "$1,$2")
-    .replace(/^00(,\d{2})$/g, "0$1")
-    .replace(/^00(\d)(,\d{2})$/g, "$1$2")
-    .replace(/^0(\d)(,\d{2})$/g, "$1$2")
-    .replace(/^(\d{1,})(,\d{2})$/g, "R$ $1$2");
+    .replace(/\D/g, '')
+    .replace(/^(\d{1})$/g, '0,0$1')
+    .replace(/^(\d{2})$/g, '0,$1')
+    .replace(/^(\d{1,})(\d{2})$/g, '$1,$2')
+    .replace(/^00(,\d{2})$/g, '0$1')
+    .replace(/^00(\d)(,\d{2})$/g, '$1$2')
+    .replace(/^0(\d)(,\d{2})$/g, '$1$2')
+    .replace(/^(\d{1,})(,\d{2})$/g, 'R$ $1$2');
+}
+
+/**
+ * Return numbers
+ * @param {string} text
+ * @returns string
+ */
+function maskNumber(text = '') {
+  return text.replace(/\D/g, '');
 }
 
 /**
@@ -92,25 +101,25 @@ function maskMoney(text = "") {
 function maskText(maskType, onChangeText) {
   return function (text) {
     switch (maskType) {
-      case "number":
-        onChangeText(text.replace(/\D/g, ""));
+      case 'number':
+        onChangeText(maskNumber(text));
         break;
-      case "cpf":
+      case 'cpf':
         onChangeText(maskCpf(text));
         break;
-      case "cnpj":
+      case 'cnpj':
         onChangeText(maskCnpj(text));
         break;
-      case "phone":
+      case 'phone':
         onChangeText(maskPhone(text));
         break;
-      case "cep":
+      case 'cep':
         onChangeText(maskCep(text));
         break;
-      case "data":
+      case 'data':
         onChangeText(maskDate(text));
         break;
-      case "money":
+      case 'money':
         onChangeText(maskMoney(text));
         break;
       default:
@@ -120,6 +129,7 @@ function maskText(maskType, onChangeText) {
 }
 
 module.exports = {
+  maskNumber,
   maskCpf,
   maskCnpj,
   maskPhone,
