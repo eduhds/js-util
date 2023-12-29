@@ -2,8 +2,15 @@
   "name": "js-util",
   "version": "1.0.0",
   "description": "JavaScript Util Codes",
-  "main": "index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
+    "clean": "rm -rf node_modules && rm -rf .pnpm-store && rm -rf lib",
+    "tsc": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "prepublishOnly": "pnpm run tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +25,8 @@
   },
   "homepage": "https://github.com/eduhds/js-util#readme",
   "devDependencies": {
-    "consola": "^3.2.3"
+    "consola": "^3.2.3",
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "consola": "^3.2.3"
