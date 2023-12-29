@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/eduhds/js-util/issues"
   },
-  "homepage": "https://github.com/eduhds/js-util#readme"
+  "homepage": "https://github.com/eduhds/js-util#readme",
+  "devDependencies": {
+    "consola": "^3.2.3"
+  },
+  "peerDependencies": {
+    "consola": "^3.2.3"
+  }
 }
