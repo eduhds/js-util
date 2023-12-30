@@ -1,5 +1,5 @@
 {
-  "name": "js-util",
+  "name": "@eduhds/js-util",
   "version": "1.0.0",
   "description": "JavaScript Util Codes",
   "main": "./lib/cjs/index.js",
