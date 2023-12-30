@@ -1,6 +1,7 @@
 /**
  * Timestamp em UNIX Epoch
  * @returns number
+ * @deprecated
  */
 function getUnixEpochTimestamp() {
 	return Math.floor(Date.now() / 1000);
@@ -10,6 +11,7 @@ function getUnixEpochTimestamp() {
  * Conversão de UNIX Epoch
  * @param {number} unixEpochTimestamp
  * @returns number
+ * @deprecated
  */
 function convertTimestampFromUnixEpoch(unixEpochTimestamp) {
 	return Math.floor(unixEpochTimestamp * 1000);
@@ -17,5 +19,5 @@ function convertTimestampFromUnixEpoch(unixEpochTimestamp) {
 
 module.exports = {
 	getUnixEpochTimestamp,
-	convertTimestampFromUnixEpoch,
+	convertTimestampFromUnixEpoch
 };
