@@ -11,7 +11,7 @@ Códigos úteis para projetos JS/TS.
 ## Instalação
 
 ```sh
-npm install eduhds/js-util
+npm i eduhds/js-util
 yarn add eduhds/js-util
 pnpm add eduhds/js-util
 ```
