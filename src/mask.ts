@@ -1,9 +1,7 @@
 /**
  * Return as 000.000.000-00
- * @param {string} text
- * @returns string
  */
-function maskCpf(text = '') {
+export function maskCpf(text: string) {
   return text
     .replace(/\D/g, '')
     .replace(/(\d{3})(\d)/, '$1.$2')
@@ -14,10 +12,8 @@ function maskCpf(text = '') {
 
 /**
  * Return as 00.000.000/0000-00
- * @param {string} text
- * @returns string
  */
-function maskCnpj(text = '') {
+export function maskCnpj(text: string) {
   return text
     .replace(/\D/g, '')
     .replace(/(\d{2})(\d)/, '$1.$2')
@@ -29,10 +25,8 @@ function maskCnpj(text = '') {
 
 /**
  * Return as (00) 0000-0000 or (00) 00000-0000
- * @param {string} text
- * @returns string
  */
-function maskPhone(text = '') {
+export function maskPhone(text: string) {
   return text
     .replace(/\D/g, '')
     .replace(/(\d{2})(\d)/, '($1) $2')
@@ -43,10 +37,8 @@ function maskPhone(text = '') {
 
 /**
  * Return as 00000-000
- * @param {string} text
- * @returns string
  */
-function maskCep(text = '') {
+export function maskCep(text: string) {
   return text
     .replace(/\D/g, '')
     .replace(/(\d{5})(\d)/, '$1-$2')
@@ -55,10 +47,8 @@ function maskCep(text = '') {
 
 /**
  * Return as 00/00/0000
- * @param {string} text
- * @returns string
  */
-function maskDate(text = '') {
+export function maskDate(text: string) {
   return text
     .replace(/\D/g, '')
     .replace(/(\d{2})(\d)/, '$1/$2')
@@ -68,10 +58,8 @@ function maskDate(text = '') {
 
 /**
  * Return as R$ 0,00
- * @param {string} text
- * @returns string
  */
-function maskMoney(text = '') {
+export function maskMoney(text: string) {
   return text
     .replace(/\D/g, '')
     .replace(/^(\d{1})$/g, '0,0$1')
@@ -85,21 +73,20 @@ function maskMoney(text = '') {
 
 /**
  * Return numbers
- * @param {string} text
- * @returns string
  */
-function maskNumber(text = '') {
+export function maskNumber(text: string) {
   return text.replace(/\D/g, '');
 }
 
 /**
  * Mask text
- * @param {string} maskType
- * @param {Function} onChangeText
- * @returns {Function}
  */
-function maskText(maskType, onChangeText) {
-  return function (text) {
+export function maskText(
+  maskType: 'number' | 'cpf' | 'cnpj' | 'phone' | 'cep' | 'data' | 'money',
+  onChangeText: (text: string) => void
+) {
+  return function (text?: string) {
+    text = '';
     switch (maskType) {
       case 'number':
         onChangeText(maskNumber(text));
@@ -127,14 +114,3 @@ function maskText(maskType, onChangeText) {
     }
   };
 }
-
-module.exports = {
-  maskNumber,
-  maskCpf,
-  maskCnpj,
-  maskPhone,
-  maskCep,
-  maskMoney,
-  maskDate,
-  maskText,
-};
