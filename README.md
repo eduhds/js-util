@@ -6,8 +6,12 @@
 ![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220)
 ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
 
-JavaScript Util Codes
+Códigos úteis para projetos JS/TS.
 
-```bash
-yarn add git+https://git@github.com/eduhds/js-util.git
+## Instalação
+
+```sh
+npm install eduhds/js-util
+yarn add eduhds/js-util
+pnpm add eduhds/js-util
 ```
