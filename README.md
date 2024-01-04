@@ -8,10 +8,28 @@
 
 Códigos úteis para projetos JS/TS.
 
+[Documentação]()
+
 ## Instalação
 
 ```sh
 npm i eduhds/js-util
 yarn add eduhds/js-util
 pnpm add eduhds/js-util
+```
+
+## Desenvolvimento
+
+```sh
+# Limpar outputs
+pnpm run clean
+
+# Compilar lib
+pnpm run tsc
+
+# Executar testes
+pnpm run test
+
+# Gerar documentação
+pnpm run docs
 ```
