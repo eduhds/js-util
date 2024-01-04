@@ -8,7 +8,7 @@
 
 Códigos úteis para projetos JS/TS.
 
-[Documentação]()
+[Documentação](https://eduhds.github.io/js-util/)
 
 ## Instalação
 
