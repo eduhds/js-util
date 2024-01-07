@@ -1,8 +1,11 @@
 type ObjectSortItem = {
-    [key: string]: string;
+    [key: string]: unknown;
 };
 /**
- * Sort array of object by key property
+ * Sort array of objects by key property
+ * @example
+ * // returns [ { name: 'Davi' }, { name: 'João' }, { name: 'Maria' }, { name: 'Pedro' } ]
+ * [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }].sort(sortByKey('name'));
  */
 export declare function sortByKey(k: string): (a: ObjectSortItem, b: ObjectSortItem) => 1 | -1 | 0;
 export {};
