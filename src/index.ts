@@ -17,7 +17,8 @@ import {
   capitalize,
   numberFromText,
   fileNameFromPath,
-  extensionFromFileName
+  extensionFromFileName,
+  titleize
 } from './string';
 import {
   emailIsValid,
@@ -53,5 +54,6 @@ export {
   cpfIsValid,
   cnpjIsValid,
   cpfcnpjIsValid,
-  uuidIsValid
+  uuidIsValid,
+  titleize
 };

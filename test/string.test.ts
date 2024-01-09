@@ -5,7 +5,8 @@ import {
   capitalize,
   numberFromText,
   fileNameFromPath,
-  extensionFromFileName
+  extensionFromFileName,
+  titleize
 } from '../src';
 
 describe('string', () => {
@@ -22,7 +23,19 @@ describe('string', () => {
   });
 
   test('capitalize', () => {
+    expect(capitalize('')).toBe('');
     expect(capitalize('abcde')).toBe('Abcde');
+    expect(capitalize('Abcde')).toBe('Abcde');
+    expect(capitalize('abcde efgh')).toBe('Abcde efgh');
+    expect(capitalize('abcde Efgh')).toBe('Abcde efgh');
+  });
+
+  test('titleize', () => {
+    expect(titleize('')).toBe('');
+    expect(titleize('abcde')).toBe('Abcde');
+    expect(titleize('Abcde')).toBe('Abcde');
+    expect(titleize('abcde efgh')).toBe('Abcde Efgh');
+    expect(titleize('abcde Efgh')).toBe('Abcde Efgh');
   });
 
   test('numberFromText', () => {

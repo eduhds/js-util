@@ -30,10 +30,24 @@ export function normalizeLower(text: string) {
 
 /**
  * Return text with first letter to uppercase
+ * @example
+ * // returns Lorem ipsum
+ * capitalize('lorem ipsum')
  */
 export function capitalize(text: string) {
   if (typeof text !== 'string') throw new Error('Param is not a string');
-  return text.length > 1 ? text.charAt(0).toUpperCase() + text.slice(1) : text.toUpperCase();
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}
+
+/**
+ * Return text with all word first letter to uppercase
+ * @example
+ * // returns Lorem Ipsum Dolor Sit
+ * capitalize('lorem ipsum dolor sit')
+ */
+export function titleize(text: string) {
+  if (typeof text !== 'string') throw new Error('Param is not a string');
+  return text.split(' ').map(capitalize).join(' ');
 }
 
 /**
