@@ -1,5 +1,3 @@
-type ObjectSortItem = { [key: string]: unknown };
-
 /**
  * Sort array of objects by key property
  * @example
@@ -7,7 +5,7 @@ type ObjectSortItem = { [key: string]: unknown };
  * [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }].sort(sortByKey('name'));
  */
 export function sortByKey(k: string) {
-  return function (a: ObjectSortItem, b: ObjectSortItem) {
+  return function (a: { [key: string]: unknown }, b: { [key: string]: unknown }) {
     let textA = a[k] as string | number;
     let textB = b[k] as string | number;
     if (typeof textA === 'string') textA = textA.toUpperCase().trim();
