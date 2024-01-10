@@ -28,6 +28,7 @@ import {
   cpfcnpjIsValid,
   uuidIsValid
 } from './validate';
+import { keySelect } from './object';
 
 export {
   sortByKey,
@@ -55,5 +56,6 @@ export {
   cnpjIsValid,
   cpfcnpjIsValid,
   uuidIsValid,
-  titleize
+  titleize,
+  keySelect
 };
