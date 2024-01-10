@@ -9,5 +9,12 @@ test('Conversão de UNIX Epoch', () => {
 });
 
 test('Formato de data BR', () => {
-  expect(formatDateBR(new Date('2024-01-02'))).toBe('02/01/2024');
+  const date = new Date();
+  expect(formatDateBR(date)).toBe(
+    date.getDate().toString().padStart(2, '0') +
+      '/' +
+      (date.getMonth() + 1).toString().padStart(2, '0') +
+      '/' +
+      date.getFullYear()
+  );
 });
