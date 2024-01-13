@@ -12,8 +12,18 @@ export declare function formatPlacaOld(value: string): string;
 export declare function normalizeLower(text: string): string;
 /**
  * Return text with first letter to uppercase
+ * @example
+ * // returns Lorem ipsum
+ * capitalize('lorem ipsum')
  */
 export declare function capitalize(text: string): string;
+/**
+ * Return text with all word first letter to uppercase
+ * @example
+ * // returns Lorem Ipsum Dolor Sit
+ * capitalize('lorem ipsum dolor sit')
+ */
+export declare function titleize(text: string): string;
 /**
  * Extract number from text
  */
