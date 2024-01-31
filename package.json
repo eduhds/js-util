@@ -1,6 +1,6 @@
 {
   "name": "@eduhds/js-util",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "JavaScript Util Codes",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -12,7 +12,8 @@
     "tsc": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "prepublishOnly": "pnpm run tsc",
     "test": "jest",
-    "docs": "typedoc --out docs src"
+    "docs": "typedoc --out docs src",
+    "build": "pnpm run tsc && pnpm run docs && npx changelogen --release"
   },
   "repository": {
     "type": "git",
