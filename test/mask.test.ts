@@ -1,13 +1,4 @@
-import {
-  maskCpf,
-  maskCnpj,
-  maskPhone,
-  maskCep,
-  maskDate,
-  maskMoney,
-  maskNumber
-  // TODO: maskText
-} from '../src';
+import { maskCpf, maskCnpj, maskPhone, maskCep, maskDate, maskMoney, maskNumber } from '../src';
 
 describe('Mask', () => {
   test('Mask cpf', () => {

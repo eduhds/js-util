@@ -80,6 +80,7 @@ export function maskNumber(text: string) {
 
 /**
  * Mask text
+ * @deprecated use `maskCpf`, `maskCnpj`, `maskPhone`, `maskCep`, `maskDate`, `maskMoney` or `maskNumber`
  */
 export function maskText(
   maskType: 'number' | 'cpf' | 'cnpj' | 'phone' | 'cep' | 'data' | 'money',
@@ -87,30 +88,6 @@ export function maskText(
 ) {
   return function (text?: string) {
     text = '';
-    switch (maskType) {
-      case 'number':
-        onChangeText(maskNumber(text));
-        break;
-      case 'cpf':
-        onChangeText(maskCpf(text));
-        break;
-      case 'cnpj':
-        onChangeText(maskCnpj(text));
-        break;
-      case 'phone':
-        onChangeText(maskPhone(text));
-        break;
-      case 'cep':
-        onChangeText(maskCep(text));
-        break;
-      case 'data':
-        onChangeText(maskDate(text));
-        break;
-      case 'money':
-        onChangeText(maskMoney(text));
-        break;
-      default:
-        break;
-    }
+    onChangeText(text);
   };
 }
