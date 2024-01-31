@@ -13,7 +13,7 @@
     "prepublishOnly": "pnpm run tsc",
     "test": "jest",
     "docs": "typedoc --out docs src",
-    "build": "pnpm run tsc && pnpm run docs && npx changelogen --release"
+    "build": "pnpm run tsc && pnpm run docs && npx changelogen --output --bump"
   },
   "repository": {
     "type": "git",

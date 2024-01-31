@@ -28,5 +28,6 @@ export declare function maskMoney(text: string): string;
 export declare function maskNumber(text: string): string;
 /**
  * Mask text
+ * @deprecated use `maskCpf`, `maskCnpj`, `maskPhone`, `maskCep`, `maskDate`, `maskMoney` or `maskNumber`
  */
 export declare function maskText(maskType: 'number' | 'cpf' | 'cnpj' | 'phone' | 'cep' | 'data' | 'money', onChangeText: (text: string) => void): (text?: string) => void;
