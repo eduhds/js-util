@@ -1,8 +1,6 @@
 # Changelog
 
-
 ## v2.0.0
-
 
 ### 🚀 Enhancements
 
@@ -24,7 +22,7 @@
 - Capitalize and titleize ([b945f67](https://github.com/eduhds/js-util/commit/b945f67))
 - SortByKey inline types ([d7984d3](https://github.com/eduhds/js-util/commit/d7984d3))
 - Date test ([63ee875](https://github.com/eduhds/js-util/commit/63ee875))
-- ⚠️  `maskText` deprecated ([b1bd9f6](https://github.com/eduhds/js-util/commit/b1bd9f6))
+- ⚠️ `maskText` deprecated ([b1bd9f6](https://github.com/eduhds/js-util/commit/b1bd9f6))
 
 ### 💅 Refactors
 
@@ -61,10 +59,8 @@
 
 #### ⚠️ Breaking Changes
 
-- ⚠️  `maskText` deprecated ([b1bd9f6](https://github.com/eduhds/js-util/commit/b1bd9f6))
+- ⚠️ `maskText` deprecated ([b1bd9f6](https://github.com/eduhds/js-util/commit/b1bd9f6))
 
 ### ❤️ Contributors
 
 - Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
-- Eduardo Henrique <eduardohds.dev@outlook.com>
-
