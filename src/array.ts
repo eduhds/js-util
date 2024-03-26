@@ -13,3 +13,18 @@ export function sortByKey(k: string) {
     return textA < textB ? -1 : textA > textB ? 1 : 0;
   };
 }
+
+/**
+ * Split array into chunks
+ * @example
+ * // returns [ ['a', 'b', 'c'], ['d', 'e', 'f'] ]
+ * splitArray(['a', 'b', 'c', 'd', 'e', 'f'], 3);
+ */
+export function splitArray(array: Array<string | number>, chunkSize: number) {
+  let splitedArray = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    const chunk = array.slice(i, i + chunkSize);
+    splitedArray.push(chunk);
+  }
+  return splitedArray;
+}

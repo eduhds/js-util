@@ -1,4 +1,4 @@
-import { sortByKey } from './array';
+import { sortByKey, splitArray } from './array';
 import { getUnixEpochTimestamp, convertTimestampFromUnixEpoch, formatDateBR } from './date';
 import {
   maskCpf,
@@ -32,6 +32,7 @@ import { keySelect } from './object';
 
 export {
   sortByKey,
+  splitArray,
   getUnixEpochTimestamp,
   convertTimestampFromUnixEpoch,
   formatDateBR,
