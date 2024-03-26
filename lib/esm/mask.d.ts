@@ -1,29 +1,50 @@
 /**
- * Return as 000.000.000-00
+ * Return CPF formatted as 000.000.000-00
+ * @example
+ * // returns 123.456.789-01
+ * maskCpf('12345678901')
  */
 export declare function maskCpf(text: string): string;
 /**
- * Return as 00.000.000/0000-00
+ * Return CNPJ formatted as 00.000.000/0000-00
+ * @example
+ * // returns 12.345.678/9012-34
+ * maskCnpj('12345678901234')
  */
 export declare function maskCnpj(text: string): string;
 /**
- * Return as (00) 0000-0000 or (00) 00000-0000
+ * Return phone formatted as (00) 0000-0000 or (00) 00000-0000
+ * @example
+ * // returns (00) 12345-6789
+ * maskPhone('00123456789')
  */
 export declare function maskPhone(text: string): string;
 /**
- * Return as 00000-000
+ * Return CEP formatted as 00000-000
+ * @example
+ * // returns 12345-678
+ * maskCep('12345678')
  */
 export declare function maskCep(text: string): string;
 /**
- * Return as 00/00/0000
+ * Return date formatted as 00/00/0000
+ * @example
+ * // returns 12/12/2012
+ * maskDate('12122012')
  */
 export declare function maskDate(text: string): string;
 /**
- * Return as R$ 0,00
+ * Return money formatted as R$ 0,00
+ * @example
+ * // returns R$ 100,00
+ * maskMoney('10000')
  */
 export declare function maskMoney(text: string): string;
 /**
- * Return numbers
+ * Return only numbers
+ * @example
+ * // returns 123
+ * maskNumber('ab12cd3')
  */
 export declare function maskNumber(text: string): string;
 /**
