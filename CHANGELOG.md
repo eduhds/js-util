@@ -1,5 +1,28 @@
 # Changelog
 
+## v2.1.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.0.0...v2.1.0)
+
+### 🚀 Enhancements
+
+- Added splitArray ([b267e7a](https://github.com/eduhds/js-util/commit/b267e7a))
+
+### 📖 Documentation
+
+- Format changelog ([ca8ced6](https://github.com/eduhds/js-util/commit/ca8ced6))
+- Mask examples added ([329b79d](https://github.com/eduhds/js-util/commit/329b79d))
+
+### 📦 Build
+
+- Lib, docs ([bc15a2a](https://github.com/eduhds/js-util/commit/bc15a2a))
+- Lib, docs ([682d0bf](https://github.com/eduhds/js-util/commit/682d0bf))
+- Docs ([9fc14ff](https://github.com/eduhds/js-util/commit/9fc14ff))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.0.0
 
 ### 🚀 Enhancements
