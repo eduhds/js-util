@@ -29,6 +29,7 @@ import {
   uuidIsValid
 } from './validate';
 import { keySelect } from './object';
+import { bytesToSize } from './util';
 
 export {
   sortByKey,
@@ -58,5 +59,6 @@ export {
   cpfcnpjIsValid,
   uuidIsValid,
   titleize,
-  keySelect
+  keySelect,
+  bytesToSize
 };

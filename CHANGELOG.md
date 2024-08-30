@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.2.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.1.0...v2.2.0)
+
+### 🚀 Enhancements
+
+- Add util bytesToSize ([e7ac787](https://github.com/eduhds/js-util/commit/e7ac787))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.1.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.0.0...v2.1.0)

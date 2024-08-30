@@ -4,4 +4,5 @@ import { maskCpf, maskCnpj, maskPhone, maskCep, maskDate, maskMoney, maskNumber,
 import { formatMoneyBR, formatPlacaOld, normalizeLower, capitalize, numberFromText, fileNameFromPath, extensionFromFileName, titleize } from './string';
 import { emailIsValid, phoneIsValid, cpfIsValid, cnpjIsValid, cpfcnpjIsValid, uuidIsValid } from './validate';
 import { keySelect } from './object';
-export { sortByKey, splitArray, getUnixEpochTimestamp, convertTimestampFromUnixEpoch, formatDateBR, maskCpf, maskCnpj, maskPhone, maskCep, maskDate, maskMoney, maskNumber, maskText, formatMoneyBR, formatPlacaOld, normalizeLower, capitalize, numberFromText, fileNameFromPath, extensionFromFileName, emailIsValid, phoneIsValid, cpfIsValid, cnpjIsValid, cpfcnpjIsValid, uuidIsValid, titleize, keySelect };
+import { bytesToSize } from './util';
+export { sortByKey, splitArray, getUnixEpochTimestamp, convertTimestampFromUnixEpoch, formatDateBR, maskCpf, maskCnpj, maskPhone, maskCep, maskDate, maskMoney, maskNumber, maskText, formatMoneyBR, formatPlacaOld, normalizeLower, capitalize, numberFromText, fileNameFromPath, extensionFromFileName, emailIsValid, phoneIsValid, cpfIsValid, cnpjIsValid, cpfcnpjIsValid, uuidIsValid, titleize, keySelect, bytesToSize };
