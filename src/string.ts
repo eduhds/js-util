@@ -42,8 +42,8 @@ export function capitalize(text: string) {
 /**
  * Return text with all word first letter to uppercase
  * @example
- * // returns Lorem Ipsum Dolor Sit
- * capitalize('lorem ipsum dolor sit')
+ * // returns 'Lorem Ipsum Dolor Sit'
+ * titleize('lorem ipsum dolor sit')
  */
 export function titleize(text: string) {
   if (typeof text !== 'string') throw new Error('Param is not a string');
