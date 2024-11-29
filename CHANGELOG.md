@@ -1,5 +1,30 @@
 # Changelog
 
+## v2.3.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.2.0...v2.3.0)
+
+### 🚀 Enhancements
+
+- Add formatTimeBR ([e7073c7](https://github.com/eduhds/js-util/commit/e7073c7))
+- Add maskCreditCard ([34b30cb](https://github.com/eduhds/js-util/commit/34b30cb))
+- Add getCreditCardBrand ([2ef076f](https://github.com/eduhds/js-util/commit/2ef076f))
+- Add cepIsValid ([02d9de4](https://github.com/eduhds/js-util/commit/02d9de4))
+- Update exports ([0ca834c](https://github.com/eduhds/js-util/commit/0ca834c))
+
+### 🩹 Fixes
+
+- Titleize example ([de3fd20](https://github.com/eduhds/js-util/commit/de3fd20))
+- Add describe module name ([aaaabbd](https://github.com/eduhds/js-util/commit/aaaabbd))
+
+### 🏡 Chore
+
+- Update pnpm-lock.yml ([863f39d](https://github.com/eduhds/js-util/commit/863f39d))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.2.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.1.0...v2.2.0)

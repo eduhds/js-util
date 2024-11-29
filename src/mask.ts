@@ -100,6 +100,21 @@ export function maskNumber(text: string) {
 }
 
 /**
+ * Mask Credit Card
+ * @example
+ * // returns 1234 5678 9012 3456
+ * maskCreditCard('1234567890123456')
+ */
+export function maskCreditCard(text: string) {
+  return text
+    .replace(/\D/g, '')
+    .replace(/(\d{4})(\d)/, '$1 $2')
+    .replace(/(\d{4})(\d)/, '$1 $2')
+    .replace(/(\d{4})(\d)/, '$1 $2')
+    .replace(/(\d{4})\d+?$/, '$1');
+}
+
+/**
  * Mask text
  * @deprecated use `maskCpf`, `maskCnpj`, `maskPhone`, `maskCep`, `maskDate`, `maskMoney` or `maskNumber`
  */

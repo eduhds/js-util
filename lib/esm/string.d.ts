@@ -20,8 +20,8 @@ export declare function capitalize(text: string): string;
 /**
  * Return text with all word first letter to uppercase
  * @example
- * // returns Lorem Ipsum Dolor Sit
- * capitalize('lorem ipsum dolor sit')
+ * // returns 'Lorem Ipsum Dolor Sit'
+ * titleize('lorem ipsum dolor sit')
  */
 export declare function titleize(text: string): string;
 /**

@@ -22,3 +22,12 @@ export declare function cpfcnpjIsValid(cpfcnpj: string): boolean;
  * Validate UUID code
  */
 export declare function uuidIsValid(uuid: string): boolean;
+/**
+ * Validate CEP number
+ * @example
+ * // returns true
+ * cepIsValid('12345-678')
+ * // returns false
+ * cepIsValid('12345678')
+ */
+export declare function cepIsValid(cep: string): boolean;

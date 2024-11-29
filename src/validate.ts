@@ -47,3 +47,16 @@ export function uuidIsValid(uuid: string) {
   const reg = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
   return reg.test(String(uuid).toLowerCase());
 }
+
+/**
+ * Validate CEP number
+ * @example
+ * // returns true
+ * cepIsValid('12345-678')
+ * // returns false
+ * cepIsValid('12345678')
+ */
+export function cepIsValid(cep: string) {
+  let reg = /^[0-9]{5}-[0-9]{3}$/;
+  return reg.test(cep);
+}
