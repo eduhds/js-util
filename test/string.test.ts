@@ -9,7 +9,7 @@ import {
   titleize
 } from '../src';
 
-describe('string', () => {
+describe('Module "string"', () => {
   test('formatMoneyBR', () => {
     expect(formatMoneyBR(100000)).toBe('100.000,00');
   });

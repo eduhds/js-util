@@ -9,7 +9,7 @@ import {
   maskCreditCard
 } from '../src';
 
-describe('Mask', () => {
+describe('Module "mask"', () => {
   test('Mask cpf', () => {
     expect(maskCpf('12345678901')).toBe('123.456.789-01');
   });

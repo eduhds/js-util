@@ -8,7 +8,7 @@ import {
   cepIsValid
 } from '../src';
 
-describe('validate', () => {
+describe('Module "validate"', () => {
   test('emailIsValid', () => {
     expect(emailIsValid('')).toBe(false);
     expect(emailIsValid('a')).toBe(false);
