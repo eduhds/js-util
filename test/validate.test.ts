@@ -4,7 +4,8 @@ import {
   cpfIsValid,
   cnpjIsValid,
   cpfcnpjIsValid,
-  uuidIsValid
+  uuidIsValid,
+  cepIsValid
 } from '../src';
 
 describe('validate', () => {
@@ -50,5 +51,11 @@ describe('validate', () => {
     expect(uuidIsValid('')).toBe(false);
     expect(uuidIsValid('a')).toBe(false);
     expect(uuidIsValid('abb541b7-0c1d-4b5a-9ccf-41e5b5a2650d')).toBe(true);
+  });
+
+  test('CEP is valid', () => {
+    expect(cepIsValid('')).toBe(false);
+    expect(cepIsValid('12345-678')).toBe(true);
+    expect(cepIsValid('12345678')).toBe(false);
   });
 });
