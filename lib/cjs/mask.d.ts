@@ -48,6 +48,13 @@ export declare function maskMoney(text: string): string;
  */
 export declare function maskNumber(text: string): string;
 /**
+ * Mask Credit Card
+ * @example
+ * // returns 1234 5678 9012 3456
+ * maskCreditCard('1234567890123456')
+ */
+export declare function maskCreditCard(text: string): string;
+/**
  * Mask text
  * @deprecated use `maskCpf`, `maskCnpj`, `maskPhone`, `maskCep`, `maskDate`, `maskMoney` or `maskNumber`
  */
