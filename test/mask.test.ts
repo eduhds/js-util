@@ -1,4 +1,13 @@
-import { maskCpf, maskCnpj, maskPhone, maskCep, maskDate, maskMoney, maskNumber } from '../src';
+import {
+  maskCpf,
+  maskCnpj,
+  maskPhone,
+  maskCep,
+  maskDate,
+  maskMoney,
+  maskNumber,
+  maskCreditCard
+} from '../src';
 
 describe('Mask', () => {
   test('Mask cpf', () => {
@@ -28,5 +37,10 @@ describe('Mask', () => {
 
   test('Mask number', () => {
     expect(maskNumber('a1#$2/?3|xD45,oZ')).toBe('12345');
+    expect(maskNumber('aa4s2s wf95sw ')).toBe('4295');
+  });
+
+  test('Mask Credit Card', () => {
+    expect(maskCreditCard('1234567890123456')).toBe('1234 5678 9012 3456');
   });
 });
