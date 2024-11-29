@@ -1,4 +1,9 @@
-import { getUnixEpochTimestamp, convertTimestampFromUnixEpoch, formatDateBR } from '../src';
+import {
+  getUnixEpochTimestamp,
+  convertTimestampFromUnixEpoch,
+  formatDateBR,
+  formatTimeBR
+} from '../src';
 
 test('Timestamp em UNIX Epoch', () => {
   expect(getUnixEpochTimestamp()).toBeGreaterThan(0);
@@ -17,4 +22,12 @@ test('Formato de data BR', () => {
       '/' +
       date.getFullYear()
   );
+
+  expect(formatDateBR(new Date(2012, 11, 12))).toBe('12/12/2012');
+});
+
+test('Formato de hora BR', () => {
+  const date = new Date();
+  expect(formatTimeBR(new Date(2012, 11, 12, 12, 12, 12))).toBe('12:12');
+  expect(formatTimeBR(new Date(2012, 11, 12, 12, 12, 12), true)).toBe('12:12:12');
 });
