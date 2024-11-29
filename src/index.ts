@@ -1,5 +1,10 @@
 import { sortByKey, splitArray } from './array';
-import { getUnixEpochTimestamp, convertTimestampFromUnixEpoch, formatDateBR } from './date';
+import {
+  getUnixEpochTimestamp,
+  convertTimestampFromUnixEpoch,
+  formatDateBR,
+  formatTimeBR
+} from './date';
 import {
   maskCpf,
   maskCnpj,
@@ -8,6 +13,7 @@ import {
   maskDate,
   maskMoney,
   maskNumber,
+  maskCreditCard,
   maskText
 } from './mask';
 import {
@@ -26,10 +32,11 @@ import {
   cpfIsValid,
   cnpjIsValid,
   cpfcnpjIsValid,
-  uuidIsValid
+  uuidIsValid,
+  cepIsValid
 } from './validate';
 import { keySelect } from './object';
-import { bytesToSize } from './util';
+import { bytesToSize, getCreditCardBrand } from './util';
 
 export {
   sortByKey,
@@ -37,6 +44,7 @@ export {
   getUnixEpochTimestamp,
   convertTimestampFromUnixEpoch,
   formatDateBR,
+  formatTimeBR,
   maskCpf,
   maskCnpj,
   maskPhone,
@@ -44,6 +52,7 @@ export {
   maskDate,
   maskMoney,
   maskNumber,
+  maskCreditCard,
   maskText,
   formatMoneyBR,
   formatPlacaOld,
@@ -58,7 +67,9 @@ export {
   cnpjIsValid,
   cpfcnpjIsValid,
   uuidIsValid,
+  cepIsValid,
   titleize,
   keySelect,
-  bytesToSize
+  bytesToSize,
+  getCreditCardBrand
 };
