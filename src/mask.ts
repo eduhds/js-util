@@ -115,6 +115,26 @@ export function maskCreditCard(text: string) {
 }
 
 /**
+ * Mask number with decimals
+ * @example
+ * // returns 1,0
+ * maskNumberDecimals('1')
+ * // returns 1,00
+ * maskNumberDecimals('100', 2)
+ */
+export function maskNumberDecimals(text: string, decimals = 1) {
+  decimals = Math.max(decimals, 1);
+  return text
+    .replace(/\D/g, '')
+    .replace(
+      new RegExp(`^(\\d{1,${decimals}})$`, 'g'),
+      s => '0'.repeat(decimals - s.length + 1) + s
+    )
+    .replace(new RegExp(`^(\\d{1,})(\\d{${decimals}})$`, 'g'), '$1,$2')
+    .replace(new RegExp(`(0{1,})(\\d{1,}),(\\d{${decimals}})`, 'g'), '$2,$3');
+}
+
+/**
  * Mask text
  * @deprecated use `maskCpf`, `maskCnpj`, `maskPhone`, `maskCep`, `maskDate`, `maskMoney` or `maskNumber`
  */

@@ -14,6 +14,7 @@ import {
   maskMoney,
   maskNumber,
   maskCreditCard,
+  maskNumberDecimals,
   maskText
 } from './mask';
 import {
@@ -53,6 +54,7 @@ export {
   maskMoney,
   maskNumber,
   maskCreditCard,
+  maskNumberDecimals,
   maskText,
   formatMoneyBR,
   formatPlacaOld,
