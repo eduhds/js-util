@@ -6,7 +6,8 @@ import {
   maskDate,
   maskMoney,
   maskNumber,
-  maskCreditCard
+  maskCreditCard,
+  maskNumberDecimals
 } from '../src';
 
 describe('Module "mask"', () => {
@@ -42,5 +43,35 @@ describe('Module "mask"', () => {
 
   test('Mask Credit Card', () => {
     expect(maskCreditCard('1234567890123456')).toBe('1234 5678 9012 3456');
+  });
+
+  test('Mask number with specified decimals', () => {
+    expect(maskNumberDecimals('a1#$2/?3|xD45,oZ', 2)).toBe('123,45');
+    expect(maskNumberDecimals('aa4s2s wf95sw ', 3)).toBe('4,295');
+
+    expect(maskNumberDecimals('0', 1)).toBe('0,0');
+    expect(maskNumberDecimals('00', 1)).toBe('0,0');
+    expect(maskNumberDecimals('000', 1)).toBe('0,0');
+    expect(maskNumberDecimals('000', 1)).toBe('0,0');
+    expect(maskNumberDecimals('0000', 1)).toBe('0,0');
+    expect(maskNumberDecimals('123456', 1)).toBe('12345,6');
+
+    expect(maskNumberDecimals('0', 2)).toBe('0,00');
+    expect(maskNumberDecimals('00', 2)).toBe('0,00');
+    expect(maskNumberDecimals('000', 2)).toBe('0,00');
+    expect(maskNumberDecimals('000', 2)).toBe('0,00');
+    expect(maskNumberDecimals('0000', 2)).toBe('0,00');
+    expect(maskNumberDecimals('123456', 2)).toBe('1234,56');
+
+    expect(maskNumberDecimals('0', 3)).toBe('0,000');
+    expect(maskNumberDecimals('00', 3)).toBe('0,000');
+    expect(maskNumberDecimals('000', 3)).toBe('0,000');
+    expect(maskNumberDecimals('000', 3)).toBe('0,000');
+    expect(maskNumberDecimals('0000', 3)).toBe('0,000');
+    expect(maskNumberDecimals('123456', 3)).toBe('123,456');
+
+    expect(maskNumberDecimals('0')).toBe('0,0');
+    expect(maskNumberDecimals('0', 0)).toBe('0,0');
+    expect(maskNumberDecimals('0', -1)).toBe('0,0');
   });
 });
