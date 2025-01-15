@@ -55,6 +55,15 @@ export declare function maskNumber(text: string): string;
  */
 export declare function maskCreditCard(text: string): string;
 /**
+ * Mask number with decimals
+ * @example
+ * // returns 1,0
+ * maskNumberDecimals('1')
+ * // returns 1,00
+ * maskNumberDecimals('100', 2)
+ */
+export declare function maskNumberDecimals(text: string, decimals?: number): string;
+/**
  * Mask text
  * @deprecated use `maskCpf`, `maskCnpj`, `maskPhone`, `maskCep`, `maskDate`, `maskMoney` or `maskNumber`
  */

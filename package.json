@@ -1,6 +1,6 @@
 {
   "name": "@eduhds/js-util",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "JavaScript Util Codes",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",

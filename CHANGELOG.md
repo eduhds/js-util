@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.4.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.3.0...v2.4.0)
+
+### 🚀 Enhancements
+
+- Add maskNumberDecimals ([595cf7a](https://github.com/eduhds/js-util/commit/595cf7a))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.3.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.2.0...v2.3.0)
