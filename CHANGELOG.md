@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.4.1
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.4.0...v2.4.1)
+
+### 🩹 Fixes
+
+- MaskNumberDecimals remove zeros at start ([e323544](https://github.com/eduhds/js-util/commit/e323544))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.4.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.3.0...v2.4.0)
