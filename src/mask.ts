@@ -131,7 +131,7 @@ export function maskNumberDecimals(text: string, decimals = 1) {
       s => '0'.repeat(decimals - s.length + 1) + s
     )
     .replace(new RegExp(`^(\\d{1,})(\\d{${decimals}})$`, 'g'), '$1,$2')
-    .replace(new RegExp(`(0{1,})(\\d{1,}),(\\d{${decimals}})`, 'g'), '$2,$3');
+    .replace(new RegExp(`^(0{1,})(\\d{1,}),(\\d{${decimals}})`, 'g'), '$2,$3');
 }
 
 /**
