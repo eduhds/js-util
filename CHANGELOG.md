@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.4.2
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.4.1...v2.4.2)
+
+### 🩹 Fixes
+
+- Support thousands in maskNumberDecimals ([0d470db](https://github.com/eduhds/js-util/commit/0d470db))
+
+### 🏡 Chore
+
+- Setup prettier and remove pnpm ([3cdf00d](https://github.com/eduhds/js-util/commit/3cdf00d))
+- Setup commitlint and lefthook ([b6b85d1](https://github.com/eduhds/js-util/commit/b6b85d1))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.4.1
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.4.0...v2.4.1)

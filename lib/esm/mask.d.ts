@@ -60,9 +60,15 @@ export declare function maskCreditCard(text: string): string;
  * // returns 1,0
  * maskNumberDecimals('1')
  * // returns 1,00
- * maskNumberDecimals('100', 2)
+ * maskNumberDecimals('100', { decimals: 2 })
+ * // returns 1.000,00
+ * maskNumberDecimals('100000', { decimals: 2, withThousands: true })
  */
-export declare function maskNumberDecimals(text: string, decimals?: number): string;
+export declare function maskNumberDecimals(text: string, { decimals, separator, withThousands }?: {
+    decimals?: number | undefined;
+    separator?: string | undefined;
+    withThousands?: boolean | undefined;
+}): string;
 /**
  * Mask text
  * @deprecated use `maskCpf`, `maskCnpj`, `maskPhone`, `maskCep`, `maskDate`, `maskMoney` or `maskNumber`

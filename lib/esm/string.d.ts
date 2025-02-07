@@ -1,5 +1,6 @@
 /**
  * Format number as: 100000.00 to 100.000,00
+ * @deprecated use `maskNumberDecimals` instead
  */
 export declare function formatMoneyBR(value: number): string;
 /**
