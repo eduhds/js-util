@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  commands:
+    build:
+      glob: '*.{js,ts,jsx,tsx}'
+      run: npm run test
+commit-msg:
+  parallel: true
+  commands:
+    commitlint:
+      run: yarn commitlint --edit
