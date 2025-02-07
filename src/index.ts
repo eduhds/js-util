@@ -1,43 +1,43 @@
 import { sortByKey, splitArray } from './array';
 import {
-  getUnixEpochTimestamp,
   convertTimestampFromUnixEpoch,
   formatDateBR,
-  formatTimeBR
+  formatTimeBR,
+  getUnixEpochTimestamp
 } from './date';
 import {
-  maskCpf,
-  maskCnpj,
-  maskPhone,
   maskCep,
+  maskCnpj,
+  maskCpf,
+  maskCreditCard,
   maskDate,
   maskMoney,
   maskNumber,
-  maskCreditCard,
   maskNumberDecimals,
+  maskPhone,
   maskText
 } from './mask';
+import { keySelect } from './object';
 import {
+  capitalize,
+  extensionFromFileName,
+  fileNameFromPath,
   formatMoneyBR,
   formatPlacaOld,
   normalizeLower,
-  capitalize,
   numberFromText,
-  fileNameFromPath,
-  extensionFromFileName,
   titleize
 } from './string';
+import { bytesToSize, getCreditCardBrand } from './util';
 import {
+  cepIsValid,
+  cnpjIsValid,
+  cpfIsValid,
+  cpfcnpjIsValid,
   emailIsValid,
   phoneIsValid,
-  cpfIsValid,
-  cnpjIsValid,
-  cpfcnpjIsValid,
-  uuidIsValid,
-  cepIsValid
+  uuidIsValid
 } from './validate';
-import { keySelect } from './object';
-import { bytesToSize, getCreditCardBrand } from './util';
 
 export {
   sortByKey,
