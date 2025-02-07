@@ -1,5 +1,6 @@
 /**
  * Format number as: 100000.00 to 100.000,00
+ * @deprecated use `maskNumberDecimals` instead
  */
 export function formatMoneyBR(value: number) {
   if (typeof value !== 'number') throw new Error('Param is not a string');

@@ -120,18 +120,34 @@ export function maskCreditCard(text: string) {
  * // returns 1,0
  * maskNumberDecimals('1')
  * // returns 1,00
- * maskNumberDecimals('100', 2)
+ * maskNumberDecimals('100', { decimals: 2 })
+ * // returns 1.000,00
+ * maskNumberDecimals('100000', { decimals: 2, withThousands: true })
  */
-export function maskNumberDecimals(text: string, decimals = 1) {
+export function maskNumberDecimals(
+  text: string,
+  { decimals = 1, separator = ',', withThousands = false } = {}
+) {
   decimals = Math.max(decimals, 1);
-  return text
+  separator = [',', '.'].includes(separator) ? separator : ',';
+
+  const delimiter = separator === ',' ? '.' : ',';
+
+  text = text
     .replace(/\D/g, '')
     .replace(
       new RegExp(`^(\\d{1,${decimals}})$`, 'g'),
-      s => '0'.repeat(decimals - s.length + 1) + s
+      s => '0'.repeat(decimals - s.length + 1) + s // pad with 0s
     )
-    .replace(new RegExp(`^(\\d{1,})(\\d{${decimals}})$`, 'g'), '$1,$2')
-    .replace(new RegExp(`^(0{1,})(\\d{1,}),(\\d{${decimals}})`, 'g'), '$2,$3');
+    .replace(new RegExp(`^(\\d{1,})(\\d{${decimals}})$`, 'g'), `$1${separator}$2`)
+    .replace(
+      new RegExp(`^(0{1,})(\\d{1,})\\${separator}(\\d{${decimals}})`, 'g'),
+      `$2${separator}$3`
+    );
+
+  if (withThousands) text = text.replace(/(\d)(?=(\d{3})+(?!\d))/g, `$1${delimiter}`);
+
+  return text;
 }
 
 /**

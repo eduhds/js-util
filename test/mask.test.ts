@@ -46,32 +46,49 @@ describe('Module "mask"', () => {
   });
 
   test('Mask number with specified decimals', () => {
-    expect(maskNumberDecimals('a1#$2/?3|xD45,oZ', 2)).toBe('123,45');
-    expect(maskNumberDecimals('aa4s2s wf95sw ', 3)).toBe('4,295');
+    expect(maskNumberDecimals('a1#$2/?3|xD45,oZ', { decimals: 2 })).toBe('123,45');
+    expect(maskNumberDecimals('aa4s2s wf95sw ', { decimals: 3 })).toBe('4,295');
 
-    expect(maskNumberDecimals('0', 1)).toBe('0,0');
-    expect(maskNumberDecimals('00', 1)).toBe('0,0');
-    expect(maskNumberDecimals('000', 1)).toBe('0,0');
-    expect(maskNumberDecimals('000', 1)).toBe('0,0');
-    expect(maskNumberDecimals('0000', 1)).toBe('0,0');
-    expect(maskNumberDecimals('123456', 1)).toBe('12345,6');
+    expect(maskNumberDecimals('0', { decimals: 1 })).toBe('0,0');
+    expect(maskNumberDecimals('00', { decimals: 1 })).toBe('0,0');
+    expect(maskNumberDecimals('000', { decimals: 1 })).toBe('0,0');
+    expect(maskNumberDecimals('000', { decimals: 1 })).toBe('0,0');
+    expect(maskNumberDecimals('0000', { decimals: 1 })).toBe('0,0');
+    expect(maskNumberDecimals('123456', { decimals: 1 })).toBe('12345,6');
+    expect(maskNumberDecimals('0000', { decimals: 1, separator: '.' })).toBe('0.0');
+    expect(maskNumberDecimals('123456', { decimals: 1, separator: '.' })).toBe('12345.6');
 
-    expect(maskNumberDecimals('0', 2)).toBe('0,00');
-    expect(maskNumberDecimals('00', 2)).toBe('0,00');
-    expect(maskNumberDecimals('000', 2)).toBe('0,00');
-    expect(maskNumberDecimals('000', 2)).toBe('0,00');
-    expect(maskNumberDecimals('0000', 2)).toBe('0,00');
-    expect(maskNumberDecimals('123456', 2)).toBe('1234,56');
+    expect(maskNumberDecimals('0', { decimals: 2 })).toBe('0,00');
+    expect(maskNumberDecimals('00', { decimals: 2 })).toBe('0,00');
+    expect(maskNumberDecimals('000', { decimals: 2 })).toBe('0,00');
+    expect(maskNumberDecimals('000', { decimals: 2 })).toBe('0,00');
+    expect(maskNumberDecimals('0000', { decimals: 2 })).toBe('0,00');
+    expect(maskNumberDecimals('123456', { decimals: 2 })).toBe('1234,56');
+    expect(maskNumberDecimals('0000', { decimals: 2, separator: '.' })).toBe('0.00');
+    expect(maskNumberDecimals('123456', { decimals: 2, separator: '.' })).toBe('1234.56');
 
-    expect(maskNumberDecimals('0', 3)).toBe('0,000');
-    expect(maskNumberDecimals('00', 3)).toBe('0,000');
-    expect(maskNumberDecimals('000', 3)).toBe('0,000');
-    expect(maskNumberDecimals('000', 3)).toBe('0,000');
-    expect(maskNumberDecimals('0000', 3)).toBe('0,000');
-    expect(maskNumberDecimals('123456', 3)).toBe('123,456');
+    expect(maskNumberDecimals('0', { decimals: 3 })).toBe('0,000');
+    expect(maskNumberDecimals('00', { decimals: 3 })).toBe('0,000');
+    expect(maskNumberDecimals('000', { decimals: 3 })).toBe('0,000');
+    expect(maskNumberDecimals('000', { decimals: 3 })).toBe('0,000');
+    expect(maskNumberDecimals('0000', { decimals: 3 })).toBe('0,000');
+    expect(maskNumberDecimals('123456', { decimals: 3 })).toBe('123,456');
+    expect(maskNumberDecimals('0000', { decimals: 3, separator: '.' })).toBe('0.000');
+    expect(maskNumberDecimals('123456', { decimals: 3, separator: '.' })).toBe('123.456');
 
     expect(maskNumberDecimals('0')).toBe('0,0');
-    expect(maskNumberDecimals('0', 0)).toBe('0,0');
-    expect(maskNumberDecimals('0', -1)).toBe('0,0');
+    expect(maskNumberDecimals('0', { decimals: 0 })).toBe('0,0');
+    expect(maskNumberDecimals('0', { decimals: -1 })).toBe('0,0');
+    expect(maskNumberDecimals('0', { decimals: 0, separator: '.' })).toBe('0.0');
+    expect(maskNumberDecimals('0', { decimals: -1, separator: '.' })).toBe('0.0');
+
+    expect(maskNumberDecimals('1234', { decimals: 2, withThousands: true })).toBe('12,34');
+    expect(maskNumberDecimals('12345', { decimals: 2, withThousands: true })).toBe('123,45');
+    expect(maskNumberDecimals('123456', { decimals: 2, withThousands: true })).toBe('1.234,56');
+    expect(maskNumberDecimals('1234567', { decimals: 2, withThousands: true })).toBe('12.345,67');
+    expect(maskNumberDecimals('12345678', { decimals: 2, withThousands: true })).toBe('123.456,78');
+    expect(maskNumberDecimals('123456789', { decimals: 2, withThousands: true })).toBe(
+      '1.234.567,89'
+    );
   });
 });
