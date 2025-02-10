@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.4.3
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.4.2...v2.4.3)
+
+### 🏡 Chore
+
+- Update postinstall script ([3ce2393](https://github.com/eduhds/js-util/commit/3ce2393))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.4.2
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.4.1...v2.4.2)
