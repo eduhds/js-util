@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.5.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.4.3...v2.5.0)
+
+### 🚀 Enhancements
+
+- Add array functions ([983a291](https://github.com/eduhds/js-util/commit/983a291))
+
+### 🏡 Chore
+
+- Update package.json ([1277279](https://github.com/eduhds/js-util/commit/1277279))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+- Eduardo Henrique ([@eduhds](http://github.com/eduhds))
+
 ## v2.4.3
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.4.2...v2.4.3)
