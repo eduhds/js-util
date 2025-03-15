@@ -1,4 +1,4 @@
-import { sortByKey, splitArray } from './array';
+import { editAt, editWhere, filterBy, removeAt, removeWhere, sortByKey, splitArray } from './array';
 import {
   convertTimestampFromUnixEpoch,
   formatDateBR,
@@ -73,5 +73,10 @@ export {
   titleize,
   keySelect,
   bytesToSize,
-  getCreditCardBrand
+  getCreditCardBrand,
+  filterBy,
+  editAt,
+  editWhere,
+  removeAt,
+  removeWhere
 };
