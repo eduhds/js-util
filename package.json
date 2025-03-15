@@ -8,7 +8,6 @@
     "lib/"
   ],
   "scripts": {
-    "postinstall": "npx lefthook install || true",
     "clean": "rm -rf node_modules && rm -rf lib",
     "tsc": "rm -rf lib && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "prepublishOnly": "npm run tsc",
