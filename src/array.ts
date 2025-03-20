@@ -1,3 +1,5 @@
+import { normalizeLower } from './string';
+
 /**
  * Sort array of objects by key property
  * @example
@@ -29,8 +31,6 @@ export function splitArray(array: Array<string | number>, chunkSize: number) {
   return splitedArray;
 }
 
-// TODO: Support primitive values
-
 /**
  * Filter array by key and value
  * @example
@@ -53,8 +53,18 @@ export function filterBy<T, V>(
  * // returns [ { name: 'Pedro' }, { name: 'Marcos' }, { name: 'Maria' }, { name: 'Davi' } ]
  * editAt(1, { name: 'Marcos' }, [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }]);
  */
-export function editAt<T>(index: number, value: Partial<T>, array: Array<T>) {
-  return array.map((item, i) => (i === index ? { ...item, ...value } : item));
+export function editAt<T>(index: number, value: T | Partial<T>, array: Array<T>) {
+  return array.map((item, i) => {
+    if (!item || ['boolean', 'number', 'string'].includes(typeof item)) {
+      return i === index ? value : item;
+    }
+    return i === index
+      ? {
+          ...item,
+          ...(!value || ['boolean', 'number', 'string'].includes(typeof value) ? {} : value)
+        }
+      : item;
+  });
 }
 
 /**
@@ -65,12 +75,25 @@ export function editAt<T>(index: number, value: Partial<T>, array: Array<T>) {
  */
 export function editWhere<T>(
   predicate: (item: T) => boolean,
-  value: Partial<T> | ((item: T) => Partial<T>),
+  value: T | Partial<T> | ((item: T) => Partial<T>),
   array: Array<T>
 ) {
-  return array.map(item =>
-    predicate(item) ? { ...item, ...(typeof value === 'function' ? value(item) : value) } : item
-  );
+  return array.map(item => {
+    if (predicate(item)) {
+      if (!item || ['boolean', 'number', 'string'].includes(typeof item)) {
+        return typeof value === 'function' ? (value as (item: T) => Partial<T>)(item) : value;
+      }
+      return {
+        ...item,
+        ...(!value || ['boolean', 'number', 'string'].includes(typeof value)
+          ? {}
+          : typeof value === 'function'
+            ? (value as (item: T) => Partial<T>)(item)
+            : value)
+      };
+    }
+    return item;
+  });
 }
 
 /**
@@ -91,4 +114,51 @@ export function removeAt<T>(index: number, array: Array<T>) {
  */
 export function removeWhere<T>(predicate: (item: T) => boolean, array: Array<T>) {
   return array.filter(item => !predicate(item));
+}
+
+/**
+ * Search array items
+ * @example
+ * // returns [ { name: 'João' } ]
+ * searchedItems('João', [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }], ['name']);
+ * @example
+ * // returns [ 'banana' ]
+ * searchedItems('Banana', ['banana', 'maca', 'laranja', 'abacate']);
+ */
+export function searchedItems<T>(search: string, items: T[], fields?: (keyof T)[]) {
+  if (!search) {
+    return items;
+  }
+
+  const makeItemSearchable = (item: T | T[keyof T]) => {
+    switch (typeof item) {
+      case 'boolean':
+      case 'number':
+      case 'bigint':
+      case 'function':
+      case 'symbol':
+        return item.toString();
+      case 'undefined':
+        return '';
+      case 'object':
+        return JSON.stringify(item);
+      default:
+        return item as string;
+    }
+  };
+
+  if (fields?.length) {
+    items
+      .filter(item => item && typeof item === 'object')
+      .filter(item =>
+        fields.some(
+          field =>
+            normalizeLower(makeItemSearchable(item[field])).search(normalizeLower(search)) !== -1
+        )
+      );
+  }
+
+  return items.filter(
+    item => normalizeLower(makeItemSearchable(item)).search(normalizeLower(search)) !== -1
+  );
 }

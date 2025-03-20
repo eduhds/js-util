@@ -1,11 +1,20 @@
-import { editAt, editWhere, filterBy, removeAt, removeWhere, sortByKey, splitArray } from './array';
-import {
+export {
+  editAt,
+  editWhere,
+  filterBy,
+  removeAt,
+  removeWhere,
+  searchedItems,
+  sortByKey,
+  splitArray
+} from './array';
+export {
   convertTimestampFromUnixEpoch,
   formatDateBR,
   formatTimeBR,
   getUnixEpochTimestamp
 } from './date';
-import {
+export {
   maskCep,
   maskCnpj,
   maskCpf,
@@ -17,8 +26,8 @@ import {
   maskPhone,
   maskText
 } from './mask';
-import { keySelect } from './object';
-import {
+export { keySelect } from './object';
+export {
   capitalize,
   extensionFromFileName,
   fileNameFromPath,
@@ -28,8 +37,8 @@ import {
   numberFromText,
   titleize
 } from './string';
-import { bytesToSize, getCreditCardBrand } from './util';
-import {
+export { bytesToSize, getCreditCardBrand } from './util';
+export {
   cepIsValid,
   cnpjIsValid,
   cpfIsValid,
@@ -38,45 +47,3 @@ import {
   phoneIsValid,
   uuidIsValid
 } from './validate';
-
-export {
-  sortByKey,
-  splitArray,
-  getUnixEpochTimestamp,
-  convertTimestampFromUnixEpoch,
-  formatDateBR,
-  formatTimeBR,
-  maskCpf,
-  maskCnpj,
-  maskPhone,
-  maskCep,
-  maskDate,
-  maskMoney,
-  maskNumber,
-  maskCreditCard,
-  maskNumberDecimals,
-  maskText,
-  formatMoneyBR,
-  formatPlacaOld,
-  normalizeLower,
-  capitalize,
-  numberFromText,
-  fileNameFromPath,
-  extensionFromFileName,
-  emailIsValid,
-  phoneIsValid,
-  cpfIsValid,
-  cnpjIsValid,
-  cpfcnpjIsValid,
-  uuidIsValid,
-  cepIsValid,
-  titleize,
-  keySelect,
-  bytesToSize,
-  getCreditCardBrand,
-  filterBy,
-  editAt,
-  editWhere,
-  removeAt,
-  removeWhere
-};

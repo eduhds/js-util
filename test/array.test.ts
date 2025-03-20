@@ -1,70 +1,80 @@
-import { editAt, editWhere, filterBy, removeAt, removeWhere, sortByKey, splitArray } from '../src';
+import {
+  editAt,
+  editWhere,
+  filterBy,
+  removeAt,
+  removeWhere,
+  searchedItems,
+  sortByKey,
+  splitArray
+} from '../src';
+
+const people = [
+  { name: 'Pedro', age: 20 },
+  { name: 'João', age: 30 },
+  { name: 'Maria', age: 40 },
+  { name: 'Davi', age: 20 }
+];
+
+const fruits = ['banana', 'maçã', 'laranja', 'abacate', 'uva'];
+
+const letters = ['a', 'b', 'c', 'd', 'e', 'f'];
 
 describe('Module "array"', () => {
   test('Sort array of objects by key', () => {
-    const people = [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }];
     expect(people.sort(sortByKey('name'))).toEqual([
-      { name: 'Davi' },
-      { name: 'João' },
-      { name: 'Maria' },
-      { name: 'Pedro' }
+      people.find(p => p.name === 'Davi'),
+      people.find(p => p.name === 'João'),
+      people.find(p => p.name === 'Maria'),
+      people.find(p => p.name === 'Pedro')
     ]);
   });
 
   test('Split array in chunks', () => {
-    const array = ['a', 'b', 'c', 'd', 'e', 'f'];
     const chunkSize = 3;
-    expect(splitArray(array, chunkSize)).toEqual([
-      ['a', 'b', 'c'],
-      ['d', 'e', 'f']
+    expect(splitArray(letters, chunkSize)).toEqual([
+      letters.slice(0, chunkSize),
+      letters.slice(chunkSize)
     ]);
   });
 
   test('Edit array item by index', () => {
-    const array = [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }];
-    expect(editAt(1, { name: 'Marcos' }, array)).toEqual([
-      { name: 'Pedro' },
-      { name: 'Marcos' },
-      { name: 'Maria' },
-      { name: 'Davi' }
-    ]);
+    expect(editAt(1, { name: 'Marcos', age: 30 }, people)).toEqual(
+      people.map((p, i) => (i === 1 ? { name: 'Marcos', age: 30 } : p))
+    );
+    expect(editAt(3, 'limão', fruits)).toEqual(fruits.map((f, i) => (i === 3 ? 'limão' : f)));
   });
 
   test('Edit array item by predicate', () => {
-    const array = [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }];
-    expect(editWhere(p => p.name === 'Pedro', { name: 'Sebastião' }, array)).toEqual([
-      { name: 'Sebastião' },
-      { name: 'João' },
-      { name: 'Maria' },
-      { name: 'Davi' }
-    ]);
+    expect(editWhere(p => p.name === 'Pedro', { name: 'Sebastião', age: 26 }, people)).toEqual(
+      people.map(p => (p.name === 'Pedro' ? { name: 'Sebastião', age: 26 } : p))
+    );
+    expect(editWhere(p => p === 'banana', 'manga', fruits)).toEqual(
+      fruits.map(f => (f === 'banana' ? 'manga' : f))
+    );
   });
 
   test('Remove array item by index', () => {
-    const array = ['a', 'b', 'c', 'd', 'e', 'f'];
-    expect(removeAt(3, array)).toEqual(['a', 'b', 'c', 'e', 'f']);
+    expect(removeAt(3, people)).toEqual(people.filter((_, i) => i !== 3));
+    expect(removeAt(1, fruits)).toEqual(fruits.filter((_, i) => i !== 1));
+    expect(removeAt(2, letters)).toEqual(letters.filter((_, i) => i !== 2));
   });
 
   test('Remove array item by predicate', () => {
-    const array = [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }];
-    expect(removeWhere(p => p.name === 'Pedro', array)).toEqual([
-      { name: 'João' },
-      { name: 'Maria' },
-      { name: 'Davi' }
-    ]);
+    expect(removeWhere(p => p.name === 'Pedro', people)).toEqual(
+      people.filter(p => p.name !== 'Pedro')
+    );
+    expect(removeWhere(p => p === 'banana', fruits)).toEqual(fruits.filter(f => f !== 'banana'));
   });
 
   test('Filter array by key', () => {
-    const array = [
-      { name: 'Pedro', age: 20 },
-      { name: 'João', age: 30 },
-      { name: 'Maria', age: 40 },
-      { name: 'Davi', age: 20 }
-    ];
+    expect(filterBy(people, 'age', 20)).toEqual(people.filter(p => p.age === 20));
+    expect(filterBy(fruits, 'length', 5)).toEqual(fruits.filter(f => f.length === 5));
+  });
 
-    expect(filterBy(array, 'age', 20)).toEqual([
-      { name: 'Pedro', age: 20 },
-      { name: 'Davi', age: 20 }
-    ]);
+  test('Search array items', () => {
+    expect(searchedItems('João', people, ['name'])).toEqual(people.filter(p => p.name === 'João'));
+    expect(searchedItems('Banana', fruits)).toEqual(fruits.filter(f => f === 'banana'));
+    expect(searchedItems('a', letters)).toEqual(letters.filter(l => l === 'a'));
   });
 });
