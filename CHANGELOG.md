@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.5.1
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.5.0...v2.5.1)
+
+### 🩹 Fixes
+
+- Primitive values support in array functions ([5c6431f](https://github.com/eduhds/js-util/commit/5c6431f))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.5.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.4.3...v2.5.0)

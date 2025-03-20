@@ -29,14 +29,14 @@ export declare function filterBy<T, V>(array: Array<T>, key: keyof T, value: V, 
  * // returns [ { name: 'Pedro' }, { name: 'Marcos' }, { name: 'Maria' }, { name: 'Davi' } ]
  * editAt(1, { name: 'Marcos' }, [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }]);
  */
-export declare function editAt<T>(index: number, value: Partial<T>, array: Array<T>): T[];
+export declare function editAt<T>(index: number, value: T | Partial<T>, array: Array<T>): Partial<T>[];
 /**
  * Edit array item by predicate
  * @example
  * // returns [ { name: 'Pedro' }, { name: 'Marcos' }, { name: 'Maria' }, { name: 'Davi' } ]
  * editWhere(p => p.name === 'Pedro', { name: 'Marcos' }, [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }]);
  */
-export declare function editWhere<T>(predicate: (item: T) => boolean, value: Partial<T> | ((item: T) => Partial<T>), array: Array<T>): T[];
+export declare function editWhere<T>(predicate: (item: T) => boolean, value: T | Partial<T> | ((item: T) => Partial<T>), array: Array<T>): Partial<T>[];
 /**
  * Remove array item by index
  * @example
@@ -51,3 +51,13 @@ export declare function removeAt<T>(index: number, array: Array<T>): T[];
  * removeWhere(p => p.name === 'Pedro', [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }]);
  */
 export declare function removeWhere<T>(predicate: (item: T) => boolean, array: Array<T>): T[];
+/**
+ * Search array items
+ * @example
+ * // returns [ { name: 'João' } ]
+ * searchedItems('João', [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }], ['name']);
+ * @example
+ * // returns [ 'banana' ]
+ * searchedItems('Banana', ['banana', 'maca', 'laranja', 'abacate']);
+ */
+export declare function searchedItems<T>(search: string, items: T[], fields?: (keyof T)[]): T[];
