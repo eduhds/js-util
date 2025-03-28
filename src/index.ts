@@ -6,7 +6,9 @@ export {
   removeWhere,
   searchedItems,
   sortByKey,
-  splitArray
+  splitArray,
+  insert,
+  insertAt
 } from './array';
 export {
   convertTimestampFromUnixEpoch,

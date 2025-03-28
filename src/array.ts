@@ -142,3 +142,23 @@ export function searchedItems<T>(search: string, items: T[], fields?: (keyof T)[
     item => normalizeLower(makeItemSearchable(item)).search(normalizeLower(search)) !== -1
   );
 }
+
+/**
+ * Insert array item by index
+ * @example
+ * // returns [ { name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' } ]
+ * insertAt(1, { name: 'João' }, [{ name: 'Pedro' }, { name: 'Maria' }, { name: 'Davi' }]);
+ */
+export function insertAt<T>(index: number, value: T, array: Array<T>) {
+  return [...array.slice(0, index), value, ...array.slice(index)];
+}
+
+/**
+ * Insert array item
+ * @example
+ * // returns [ 1, 2, 3, 4, 5 ]
+ * insert(5, [1, 2, 3, 4]);
+ */
+export function insert<T>(value: T, array: Array<T>) {
+  return [...array, value];
+}

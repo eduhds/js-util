@@ -2,6 +2,8 @@ import {
   editAt,
   editWhere,
   filterBy,
+  insert,
+  insertAt,
   removeAt,
   removeWhere,
   searchedItems,
@@ -79,5 +81,19 @@ describe('Module "array"', () => {
     expect(searchedItems('João', people, ['name'])).toEqual(people.filter(p => p.name === 'João'));
     expect(searchedItems('Banana', fruits)).toEqual(fruits.filter(f => f === 'banana'));
     expect(searchedItems('a', letters)).toEqual(letters.filter(l => l === 'a'));
+  });
+
+  test('Insert array item', () => {
+    expect(insert('pitaya', fruits)).toEqual([...fruits, 'pitaya']);
+  });
+
+  test('Insert array item by index', () => {
+    expect(insertAt(1, 'pitaya', fruits)).toEqual([
+      ...fruits.slice(0, 1),
+      'pitaya',
+      ...fruits.slice(1)
+    ]);
+
+    expect(insertAt(0, 'pitaya', fruits)).toEqual(['pitaya', ...fruits]);
   });
 });
