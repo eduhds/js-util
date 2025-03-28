@@ -39,10 +39,13 @@ describe('Module "array"', () => {
   });
 
   test('Edit array item by index', () => {
-    expect(editAt(1, { name: 'Marcos', age: 30 }, people)).toEqual(
+    expect(editAt(1, () => ({ name: 'Marcos', age: 30 }), people)).toEqual(
       people.map((p, i) => (i === 1 ? { name: 'Marcos', age: 30 } : p))
     );
-    expect(editAt(3, 'limão', fruits)).toEqual(fruits.map((f, i) => (i === 3 ? 'limão' : f)));
+    expect(editAt(1, p => ({ ...p, age: 27 }), people)).toEqual(
+      people.map((p, i) => (i === 1 ? { name: 'João', age: 27 } : p))
+    );
+    expect(editAt(3, () => 'limão', fruits)).toEqual(fruits.map((f, i) => (i === 3 ? 'limão' : f)));
   });
 
   test('Edit array item by predicate', () => {

@@ -53,18 +53,10 @@ export function filterBy<T, V>(
  * // returns [ { name: 'Pedro' }, { name: 'Marcos' }, { name: 'Maria' }, { name: 'Davi' } ]
  * editAt(1, { name: 'Marcos' }, [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }]);
  */
-export function editAt<T>(index: number, value: T | Partial<T>, array: Array<T>) {
-  return array.map((item, i) => {
-    if (!item || ['boolean', 'number', 'string'].includes(typeof item)) {
-      return i === index ? value : item;
-    }
-    return i === index
-      ? {
-          ...item,
-          ...(!value || ['boolean', 'number', 'string'].includes(typeof value) ? {} : value)
-        }
-      : item;
-  });
+export function editAt<T>(index: number, value: T | ((value: T) => T), array: Array<T>) {
+  return array.map((item, i) =>
+    i === index ? (value instanceof Function ? value(item) : value) : item
+  );
 }
 
 /**
@@ -75,23 +67,11 @@ export function editAt<T>(index: number, value: T | Partial<T>, array: Array<T>)
  */
 export function editWhere<T>(
   predicate: (item: T) => boolean,
-  value: T | Partial<T> | ((item: T) => Partial<T>),
+  value: T | ((value: T) => T),
   array: Array<T>
 ) {
   return array.map(item => {
-    if (predicate(item)) {
-      if (!item || ['boolean', 'number', 'string'].includes(typeof item)) {
-        return typeof value === 'function' ? (value as (item: T) => Partial<T>)(item) : value;
-      }
-      return {
-        ...item,
-        ...(!value || ['boolean', 'number', 'string'].includes(typeof value)
-          ? {}
-          : typeof value === 'function'
-            ? (value as (item: T) => Partial<T>)(item)
-            : value)
-      };
-    }
+    if (predicate(item)) return value instanceof Function ? value(item) : value;
     return item;
   });
 }
