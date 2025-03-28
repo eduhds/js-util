@@ -1,4 +1,4 @@
-export { editAt, editWhere, filterBy, removeAt, removeWhere, searchedItems, sortByKey, splitArray } from './array';
+export { editAt, editWhere, filterBy, removeAt, removeWhere, searchedItems, sortByKey, splitArray, insert, insertAt } from './array';
 export { convertTimestampFromUnixEpoch, formatDateBR, formatTimeBR, getUnixEpochTimestamp } from './date';
 export { maskCep, maskCnpj, maskCpf, maskCreditCard, maskDate, maskMoney, maskNumber, maskNumberDecimals, maskPhone, maskText } from './mask';
 export { keySelect } from './object';

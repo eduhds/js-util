@@ -1,5 +1,21 @@
 # Changelog
 
+## v2.6.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.5.1...v2.6.0)
+
+### 🚀 Enhancements
+
+- Add array insert and insertAt ([fd3da3d](https://github.com/eduhds/js-util/commit/fd3da3d))
+
+### 🩹 Fixes
+
+- EditWhereand editAt less opinative ([f121859](https://github.com/eduhds/js-util/commit/f121859))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.5.1
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.5.0...v2.5.1)
