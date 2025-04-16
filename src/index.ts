@@ -28,7 +28,7 @@ export {
   maskPhone,
   maskText
 } from './mask';
-export { keySelect } from './object';
+export { keySelect, getValueAtPath, setValueAtPath } from './object';
 export {
   capitalize,
   extensionFromFileName,
