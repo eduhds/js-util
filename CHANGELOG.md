@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.7.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.6.0...v2.7.0)
+
+### 🚀 Enhancements
+
+- Add getValueAtPath and setValueAtPath ([34313ae](https://github.com/eduhds/js-util/commit/34313ae))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.6.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.5.1...v2.6.0)
