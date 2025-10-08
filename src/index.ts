@@ -26,7 +26,8 @@ export {
   maskNumber,
   maskNumberDecimals,
   maskPhone,
-  maskText
+  maskText,
+  maskPassword
 } from './mask';
 export { keySelect, getValueAtPath, setValueAtPath, jsonToBlob, blobToJson } from './object';
 export {

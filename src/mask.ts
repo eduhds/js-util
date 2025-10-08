@@ -163,3 +163,15 @@ export function maskText(
     onChangeText(text);
   };
 }
+
+/**
+ * Mask password
+ * @example
+ * // returns ******
+ * maskPassword('123456')
+ * // returns ######
+ * maskPassword('123456', '#')
+ */
+export function maskPassword(text: string, token: string = '*') {
+  return text.replace(/./g, token);
+}

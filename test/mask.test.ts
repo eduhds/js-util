@@ -1,13 +1,14 @@
 import {
-  maskCpf,
-  maskCnpj,
-  maskPhone,
   maskCep,
+  maskCnpj,
+  maskCpf,
+  maskCreditCard,
   maskDate,
   maskMoney,
   maskNumber,
-  maskCreditCard,
-  maskNumberDecimals
+  maskNumberDecimals,
+  maskPassword,
+  maskPhone
 } from '../src';
 
 describe('Module "mask"', () => {
@@ -90,5 +91,10 @@ describe('Module "mask"', () => {
     expect(maskNumberDecimals('123456789', { decimals: 2, withThousands: true })).toBe(
       '1.234.567,89'
     );
+  });
+
+  test('Mask password', () => {
+    expect(maskPassword('123456')).toBe('******');
+    expect(maskPassword('123456', '#')).toBe('######');
   });
 });
