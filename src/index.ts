@@ -28,7 +28,7 @@ export {
   maskPhone,
   maskText
 } from './mask';
-export { keySelect, getValueAtPath, setValueAtPath } from './object';
+export { keySelect, getValueAtPath, setValueAtPath, jsonToBlob, blobToJson } from './object';
 export {
   capitalize,
   extensionFromFileName,

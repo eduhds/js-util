@@ -90,3 +90,28 @@ export function setValueAtPath<T extends object, P extends string>(
 
   return setDeepValue(obj, path, value);
 }
+
+/**
+ * Converts a JSON object to a Blob object.
+ * @example
+ * // returns new Blob
+ * await jsonToBlob({foo: 'bar'})
+ */
+export async function jsonToBlob<T>(json: T) {
+  return new Blob([JSON.stringify(json)], { type: 'application/json' });
+}
+
+/**
+ * Converts a Blob object to a JSON object.
+ * @example
+ * // returns { foo: 'bar' }
+ * await blobToJson<{foo: string}>(await jsonToBlob({foo: 'bar'}))
+ */
+export async function blobToJson<T>(blob: Blob) {
+  if (blob.type !== 'application/json') {
+    throw new Error('Blob is not a JSON file');
+  }
+  const text = await blob.text();
+  const json = JSON.parse(text);
+  return json as T;
+}

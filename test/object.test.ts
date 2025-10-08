@@ -1,4 +1,4 @@
-import { getValueAtPath, keySelect, setValueAtPath } from '../src';
+import { blobToJson, getValueAtPath, jsonToBlob, keySelect, setValueAtPath } from '../src';
 
 const france = {
   name: 'France',
@@ -97,5 +97,17 @@ describe('Module "object"', () => {
       ...france,
       languages: [france.languages[0], 'latim']
     });
+  });
+
+  test('Convert JSON object to Blob', async () => {
+    const blob = await jsonToBlob({ foo: 'bar' });
+    expect(blob).toBeInstanceOf(Blob);
+    expect(blob.type).toEqual('application/json');
+  });
+
+  test('Convert JSON object to Blob', async () => {
+    const blob = await jsonToBlob({ foo: 'bar' });
+    const json = await blobToJson(blob);
+    expect(json).toEqual({ foo: 'bar' });
   });
 });
