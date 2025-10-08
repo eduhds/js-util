@@ -30,3 +30,17 @@ export type DeepValue<T, P extends string> = P extends `${infer Key}.${infer Res
  * setValueAtPath('a.b.c.d', 'e', { a: { b: { c: { d: 'f' } } } });
  */
 export declare function setValueAtPath<T extends object, P extends string>(path: P, value: DeepValue<T, P>, obj: T, separator?: string): T;
+/**
+ * Converts a JSON object to a Blob object.
+ * @example
+ * // returns new Blob
+ * await jsonToBlob({foo: 'bar'})
+ */
+export declare function jsonToBlob<T>(json: T): Promise<Blob>;
+/**
+ * Converts a Blob object to a JSON object.
+ * @example
+ * // returns { foo: 'bar' }
+ * await blobToJson<{foo: string}>(await jsonToBlob({foo: 'bar'}))
+ */
+export declare function blobToJson<T>(blob: Blob): Promise<T>;

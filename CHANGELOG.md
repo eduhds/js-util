@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.8.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.7.0...v2.8.0)
+
+### 🚀 Enhancements
+
+- Add jsonToBlob and blobToJson functions with tests ([6586f2b](https://github.com/eduhds/js-util/commit/6586f2b))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.7.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.6.0...v2.7.0)
