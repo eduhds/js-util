@@ -74,3 +74,12 @@ export declare function maskNumberDecimals(text: string, { decimals, separator, 
  * @deprecated use `maskCpf`, `maskCnpj`, `maskPhone`, `maskCep`, `maskDate`, `maskMoney` or `maskNumber`
  */
 export declare function maskText(maskType: 'number' | 'cpf' | 'cnpj' | 'phone' | 'cep' | 'data' | 'money', onChangeText: (text: string) => void): (text?: string) => void;
+/**
+ * Mask password
+ * @example
+ * // returns ******
+ * maskPassword('123456')
+ * // returns ######
+ * maskPassword('123456', '#')
+ */
+export declare function maskPassword(text: string, token?: string): string;
