@@ -115,3 +115,42 @@ export async function blobToJson<T>(blob: Blob) {
   const json = JSON.parse(text);
   return json as T;
 }
+
+export function remapProperties<
+  T extends object,
+  UArr extends readonly [readonly (keyof T)[], U][],
+  U extends string | number | symbol = UArr[number][1]
+>(obj: T, props: UArr): { [K in UArr[number][1]]: T[keyof T] };
+
+export function remapProperties<
+  T extends object,
+  UArr extends readonly [readonly (keyof T)[], U][],
+  U extends string | number | symbol = UArr[number][1]
+>(obj: T, props: UArr, merge: 'merge'): T & { [K in UArr[number][1]]: T[keyof T] };
+
+/**
+ * Returns a new object with the specified properties mapped to the given object.
+ * @example
+ * // returns { foo: 'bar' }
+ * remapProperties({ oof: 'bar' }, [[['oof'], 'foo']]);
+ */
+export function remapProperties(obj: any, props: any, merge?: any) {
+  // Recebe um objeto e um “mapa” que relaciona (possivelmente vários) campos do objeto original a novas propriedades do objeto de retorno.
+  // O resultado é um novo objeto cujas chaves são os nomes “destino” e os valores são copiados dos campos “origem” do objeto original.
+
+  const newObj: any = {};
+
+  for (const prop of props) {
+    const [from, to] = prop;
+
+    for (const key of from) {
+      newObj[to] = obj[key];
+    }
+  }
+
+  if (merge) {
+    return { ...obj, ...newObj };
+  }
+
+  return newObj;
+}

@@ -30,7 +30,14 @@ export {
   maskText,
   maskPassword
 } from './mask';
-export { keySelect, getValueAtPath, setValueAtPath, jsonToBlob, blobToJson } from './object';
+export {
+  keySelect,
+  getValueAtPath,
+  setValueAtPath,
+  jsonToBlob,
+  blobToJson,
+  remapProperties
+} from './object';
 export {
   capitalize,
   extensionFromFileName,

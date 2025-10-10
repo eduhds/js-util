@@ -1,4 +1,11 @@
-import { blobToJson, getValueAtPath, jsonToBlob, keySelect, setValueAtPath } from '../src';
+import {
+  blobToJson,
+  getValueAtPath,
+  jsonToBlob,
+  keySelect,
+  remapProperties,
+  setValueAtPath
+} from '../src';
 
 const france = {
   name: 'France',
@@ -109,5 +116,40 @@ describe('Module "object"', () => {
     const blob = await jsonToBlob({ foo: 'bar' });
     const json = await blobToJson(blob);
     expect(json).toEqual({ foo: 'bar' });
+  });
+
+  test('Remap properties', () => {
+    expect(remapProperties({ oof: 'bar' }, [[['oof'], 'foo']])).toEqual({ foo: 'bar' });
+
+    const headers = {
+      'content-type': 'application/json',
+      accept: 'application/json'
+    };
+
+    expect(
+      remapProperties(headers, [
+        [['content-type'], 'Content-Type'],
+        [['accept'], 'Accept']
+      ])
+    ).toEqual({
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    });
+
+    expect(remapProperties(headers, [[['content-type'], 'Content-Type']], 'merge')).toEqual({
+      ...headers,
+      'Content-Type': 'application/json'
+    });
+
+    const user = { id_user: 1, user_id: 2, 'id-user': 3, name: 'John Doe' };
+
+    expect(remapProperties(user, [[['id-user', 'id_user', 'user_id'], 'id']])).toEqual({
+      id: user.user_id
+    });
+
+    expect(remapProperties(user, [[['id-user'], 'id']], 'merge')).toEqual({
+      ...user,
+      id: user['id-user']
+    });
   });
 });
