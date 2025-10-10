@@ -2,6 +2,7 @@ import {
   editAt,
   editWhere,
   filterBy,
+  groupByKey,
   insert,
   insertAt,
   removeAt,
@@ -100,5 +101,13 @@ describe('Module "array"', () => {
 
   test('Shuffle array', () => {
     expect(shuffle(fruits)).toContain(fruits[Math.floor(Math.random() * fruits.length)]);
+  });
+
+  test('Group by key', () => {
+    expect(groupByKey(people, 'age')).toEqual([
+      people.filter(p => p.age === 20),
+      people.filter(p => p.age === 30),
+      people.filter(p => p.age === 40)
+    ]);
   });
 });

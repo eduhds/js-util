@@ -176,3 +176,24 @@ export function shuffle<T>(array: T[]) {
   }
   return array;
 }
+
+/**
+ * Group array by key
+ * @example
+ * // returns [ [ { name: 'Pedro', age: 20 }, { name: 'Maria', age: 20 } ], [ { name: 'João', age: 15 } ] ]
+ * groupByKey([{ name: 'Pedro', age: 20 }, { name: 'João': age: 15 }, { name: 'Maria', age: 20 }], 'age');
+ */
+export function groupByKey<T, K extends keyof T>(list: T[], key: K) {
+  const keys: T[K][] = [];
+  return list.reduce(
+    (acc, item) => {
+      let groupKey = keys.findIndex(k => k === item[key]);
+      if (groupKey === -1) {
+        groupKey = keys.push(item[key]) - 1;
+      }
+      (acc[groupKey] = acc[groupKey] || []).push(item);
+      return acc;
+    },
+    [] as Array<T[]>
+  );
+}

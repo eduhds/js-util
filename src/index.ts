@@ -9,7 +9,8 @@ export {
   splitArray,
   insert,
   insertAt,
-  shuffle
+  shuffle,
+  groupByKey
 } from './array';
 export {
   convertTimestampFromUnixEpoch,
