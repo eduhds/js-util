@@ -7,6 +7,7 @@ import {
   removeAt,
   removeWhere,
   searchedItems,
+  shuffle,
   sortByKey,
   splitArray
 } from '../src';
@@ -95,5 +96,9 @@ describe('Module "array"', () => {
     ]);
 
     expect(insertAt(0, 'pitaya', fruits)).toEqual(['pitaya', ...fruits]);
+  });
+
+  test('Shuffle array', () => {
+    expect(shuffle(fruits)).toContain(fruits[Math.floor(Math.random() * fruits.length)]);
   });
 });

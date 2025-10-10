@@ -8,7 +8,8 @@ export {
   sortByKey,
   splitArray,
   insert,
-  insertAt
+  insertAt,
+  shuffle
 } from './array';
 export {
   convertTimestampFromUnixEpoch,
