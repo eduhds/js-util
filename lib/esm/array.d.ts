@@ -75,3 +75,17 @@ export declare function insertAt<T>(index: number, value: T, array: Array<T>): T
  * insert(5, [1, 2, 3, 4]);
  */
 export declare function insert<T>(value: T, array: Array<T>): T[];
+/**
+ * Shuffle array
+ * @example
+ * // returns [ 5, 4, 3, 2, 1 ] (random)
+ * shuffle([1, 2, 3, 4, 5]);
+ */
+export declare function shuffle<T>(array: T[]): T[];
+/**
+ * Group array by key
+ * @example
+ * // returns [ [ { name: 'Pedro', age: 20 }, { name: 'Maria', age: 20 } ], [ { name: 'João', age: 15 } ] ]
+ * groupByKey([{ name: 'Pedro', age: 20 }, { name: 'João': age: 15 }, { name: 'Maria', age: 20 }], 'age');
+ */
+export declare function groupByKey<T, K extends keyof T>(list: T[], key: K): T[][];

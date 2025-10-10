@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.10.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.9.0...v2.10.0)
+
+### 🚀 Enhancements
+
+- Add shuffle function with tests ([cd44fc4](https://github.com/eduhds/js-util/commit/cd44fc4))
+- Add remapProperties function with tests ([3504156](https://github.com/eduhds/js-util/commit/3504156))
+- Add groupByKey function with tests ([802a80d](https://github.com/eduhds/js-util/commit/802a80d))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.9.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.7.0...v2.9.0)

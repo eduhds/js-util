@@ -44,3 +44,9 @@ export declare function jsonToBlob<T>(json: T): Promise<Blob>;
  * await blobToJson<{foo: string}>(await jsonToBlob({foo: 'bar'}))
  */
 export declare function blobToJson<T>(blob: Blob): Promise<T>;
+export declare function remapProperties<T extends object, UArr extends readonly [readonly (keyof T)[], U][], U extends string | number | symbol = UArr[number][1]>(obj: T, props: UArr): {
+    [K in UArr[number][1]]: T[keyof T];
+};
+export declare function remapProperties<T extends object, UArr extends readonly [readonly (keyof T)[], U][], U extends string | number | symbol = UArr[number][1]>(obj: T, props: UArr, merge: 'merge'): T & {
+    [K in UArr[number][1]]: T[keyof T];
+};
