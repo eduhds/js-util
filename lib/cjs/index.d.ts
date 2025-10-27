@@ -5,3 +5,4 @@ export { keySelect, getValueAtPath, setValueAtPath, jsonToBlob, blobToJson, rema
 export { capitalize, extensionFromFileName, fileNameFromPath, formatMoneyBR, formatPlacaOld, normalizeLower, numberFromText, titleize } from './string';
 export { bytesToSize, getCreditCardBrand } from './util';
 export { cepIsValid, cnpjIsValid, cpfIsValid, cpfcnpjIsValid, emailIsValid, phoneIsValid, uuidIsValid } from './validate';
+export { parseFlexibleNumber } from './number';

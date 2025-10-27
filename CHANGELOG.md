@@ -1,5 +1,26 @@
 # Changelog
 
+## v2.11.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.10.0...v2.11.0)
+
+### 🚀 Enhancements
+
+- Add parseFlexibleNumber function with tests ([ed83a72](https://github.com/eduhds/js-util/commit/ed83a72))
+
+### 🩹 Fixes
+
+- Devcontainer ([25d2f18](https://github.com/eduhds/js-util/commit/25d2f18))
+- Enhance maskNumberDecimals function with additional test cases ([04d6268](https://github.com/eduhds/js-util/commit/04d6268))
+
+### 🏡 Chore
+
+- Add mod.ts ([65bb9dd](https://github.com/eduhds/js-util/commit/65bb9dd))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.10.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.9.0...v2.10.0)
