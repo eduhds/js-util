@@ -145,7 +145,16 @@ export function maskNumberDecimals(
       `$2${separator}$3`
     );
 
-  if (withThousands) text = text.replace(/(\d)(?=(\d{3})+(?!\d))/g, `$1${delimiter}`);
+  if (withThousands) {
+    const withDelimiter = (value: string) =>
+      value.replace(/(\d)(?=(\d{3})+(?!\d))/g, `$1${delimiter}`);
+    if (text.includes(separator)) {
+      const [left, right] = text.split(separator);
+      text = `${withDelimiter(left)}${separator}${right}`;
+    } else {
+      text = withDelimiter(text);
+    }
+  }
 
   return text;
 }

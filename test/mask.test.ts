@@ -91,6 +91,26 @@ describe('Module "mask"', () => {
     expect(maskNumberDecimals('123456789', { decimals: 2, withThousands: true })).toBe(
       '1.234.567,89'
     );
+
+    expect(maskNumberDecimals('0', { decimals: 4 })).toBe('0,0000');
+    expect(maskNumberDecimals('00', { decimals: 4 })).toBe('0,0000');
+    expect(maskNumberDecimals('000', { decimals: 4 })).toBe('0,0000');
+    expect(maskNumberDecimals('000', { decimals: 4 })).toBe('0,0000');
+    expect(maskNumberDecimals('0000', { decimals: 4 })).toBe('0,0000');
+    expect(maskNumberDecimals('123456', { decimals: 4 })).toBe('12,3456');
+    expect(maskNumberDecimals('0000', { decimals: 4, separator: '.' })).toBe('0.0000');
+    expect(maskNumberDecimals('123456', { decimals: 4, separator: '.' })).toBe('12.3456');
+    expect(maskNumberDecimals('123456789', { decimals: 4, separator: '.' })).toBe('12345.6789');
+    expect(maskNumberDecimals('123456', { decimals: 4, withThousands: true })).toBe('12,3456');
+    expect(maskNumberDecimals('0000', { decimals: 4, separator: '.', withThousands: true })).toBe(
+      '0.0000'
+    );
+    expect(maskNumberDecimals('123456', { decimals: 4, separator: '.', withThousands: true })).toBe(
+      '12.3456'
+    );
+    expect(
+      maskNumberDecimals('123456789', { decimals: 4, separator: '.', withThousands: true })
+    ).toBe('12,345.6789');
   });
 
   test('Mask password', () => {
