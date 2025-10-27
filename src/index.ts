@@ -59,3 +59,4 @@ export {
   phoneIsValid,
   uuidIsValid
 } from './validate';
+export { parseFlexibleNumber } from './number';
