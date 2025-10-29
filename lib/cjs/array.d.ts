@@ -15,7 +15,7 @@ export declare function sortByKey(k: string): (a: {
  * // returns [ ['a', 'b', 'c'], ['d', 'e', 'f'] ]
  * splitArray(['a', 'b', 'c', 'd', 'e', 'f'], 3);
  */
-export declare function splitArray(array: Array<string | number>, chunkSize: number): (string | number)[][];
+export declare function splitArray<T>(array: T[], chunkSize: number): T[][];
 /**
  * Filter array by key and value
  * @example

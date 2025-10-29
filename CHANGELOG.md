@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.11.1
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.11.0...v2.11.1)
+
+### 🩹 Fixes
+
+- Ajustar tipo genérico na função splitArray e adicionar testes ([171d054](https://github.com/eduhds/js-util/commit/171d054))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.11.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.10.0...v2.11.0)
