@@ -22,7 +22,7 @@ export function sortByKey(k: string) {
  * // returns [ ['a', 'b', 'c'], ['d', 'e', 'f'] ]
  * splitArray(['a', 'b', 'c', 'd', 'e', 'f'], 3);
  */
-export function splitArray(array: Array<string | number>, chunkSize: number) {
+export function splitArray<T>(array: T[], chunkSize: number) {
   let splitedArray = [];
   for (let i = 0; i < array.length; i += chunkSize) {
     const chunk = array.slice(i, i + chunkSize);

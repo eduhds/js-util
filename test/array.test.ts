@@ -40,6 +40,14 @@ describe('Module "array"', () => {
       letters.slice(0, chunkSize),
       letters.slice(chunkSize)
     ]);
+
+    expect(splitArray(fruits, 2)).toEqual([
+      fruits.slice(0, 2),
+      fruits.slice(2, 4),
+      fruits.slice(4)
+    ]);
+
+    expect(splitArray(people, 3)).toEqual([people.slice(0, 3), people.slice(3)]);
   });
 
   test('Edit array item by index', () => {
