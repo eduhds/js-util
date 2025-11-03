@@ -49,7 +49,7 @@ export {
   numberFromText,
   titleize
 } from './string';
-export { bytesToSize, getCreditCardBrand } from './util';
+export { bytesToSize, getCreditCardBrand, isColorLight, getRandomHexColor } from './util';
 export {
   cepIsValid,
   cnpjIsValid,

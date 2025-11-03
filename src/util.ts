@@ -49,3 +49,45 @@ export function getCreditCardBrand(cardNumber: string) {
 
   return 'Unknown';
 }
+
+/**
+ * Get random hex color
+ * @example
+ * // returns #AABBCC (random color)
+ * getRandomHexColor();
+ */
+export function getRandomHexColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+/**
+ * Check if hex color is light
+ * @example
+ * // returns true
+ * isColorLight('#FFFFFF');
+ * // returns false
+ * isColorLight('#000000');
+ */
+export function isColorLight(hex: string) {
+  if (!hex || hex.length < 7 || !hex.startsWith('#')) {
+    throw new Error('Invalid hex color');
+  }
+  // Remove the hash at the start if it's there
+  hex = hex.replace(/^#/, '');
+
+  // Parse r, g, b values
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+
+  // Calculate luminance
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+  // If luminance is greater than 128, the color is light
+  return luminance > 128;
+}

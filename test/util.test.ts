@@ -1,4 +1,4 @@
-import { bytesToSize, getCreditCardBrand } from '../src';
+import { bytesToSize, getCreditCardBrand, getRandomHexColor, isColorLight } from '../src';
 
 describe('Module "util"', () => {
   test('Transform bytes to size', () => {
@@ -16,5 +16,15 @@ describe('Module "util"', () => {
     expect(getCreditCardBrand('5555555555554444')).toEqual('Mastercard');
     expect(getCreditCardBrand('4011788388888888')).toEqual('Elo');
     expect(getCreditCardBrand('3841420130000000')).toEqual('Hipercard');
+  });
+
+  test('Get Random Hex color', () => {
+    expect(getRandomHexColor()).toHaveLength(7);
+    expect(getRandomHexColor()).toMatch(/^#([A-Fa-f0-9]{6})$/);
+  });
+
+  test('Is Color Light', () => {
+    expect(isColorLight('#FFFFFF')).toBe(true);
+    expect(isColorLight('#000000')).toBe(false);
   });
 });
