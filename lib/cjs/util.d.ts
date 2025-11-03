@@ -14,3 +14,19 @@ export declare function bytesToSize(bytes: number): string;
  * getCreditCardBrand('5555555555554444');
  */
 export declare function getCreditCardBrand(cardNumber: string): string;
+/**
+ * Get random hex color
+ * @example
+ * // returns #AABBCC (random color)
+ * getRandomHexColor();
+ */
+export declare function getRandomHexColor(): string;
+/**
+ * Check if hex color is light
+ * @example
+ * // returns true
+ * isColorLight('#FFFFFF');
+ * // returns false
+ * isColorLight('#000000');
+ */
+export declare function isColorLight(hex: string): boolean;

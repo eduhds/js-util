@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.12.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.11.1...v2.12.0)
+
+### 🚀 Enhancements
+
+- Adicionar funções getRandomHexColor e isColorLight com testes ([752f94e](https://github.com/eduhds/js-util/commit/752f94e))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.11.1
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.11.0...v2.11.1)
