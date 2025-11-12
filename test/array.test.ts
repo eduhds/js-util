@@ -2,6 +2,7 @@ import {
   editAt,
   editWhere,
   filterBy,
+  filteredList,
   groupByKey,
   insert,
   insertAt,
@@ -116,6 +117,22 @@ describe('Module "array"', () => {
       people.filter(p => p.age === 20),
       people.filter(p => p.age === 30),
       people.filter(p => p.age === 40)
+    ]);
+  });
+
+  test('Filtered list', () => {
+    expect(
+      filteredList(
+        [
+          { name: 'Pedro', age: 20 },
+          { name: 'João', age: 15 },
+          { name: 'Maria', age: 20 }
+        ],
+        { key: 'age', value: 20 }
+      )
+    ).toEqual([
+      { name: 'Pedro', age: 20 },
+      { name: 'Maria', age: 20 }
     ]);
   });
 });

@@ -10,7 +10,8 @@ export {
   insert,
   insertAt,
   shuffle,
-  groupByKey
+  groupByKey,
+  filteredList
 } from './array';
 export {
   convertTimestampFromUnixEpoch,

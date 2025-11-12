@@ -35,7 +35,7 @@ export function splitArray<T>(array: T[], chunkSize: number) {
  * Filter array by key and value
  * @example
  * // returns [ { name: 'Davi' }, { name: 'João' }, { name: 'Maria' }, { name: 'Pedro' } ]
- * [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }].filterBy('name', 'Davi');
+ * filterBy([{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }], 'name', 'Davi');
  */
 export function filterBy<T>(
   array: Array<T>,
@@ -181,7 +181,7 @@ export function shuffle<T>(array: T[]) {
  * Group array by key
  * @example
  * // returns [ [ { name: 'Pedro', age: 20 }, { name: 'Maria', age: 20 } ], [ { name: 'João', age: 15 } ] ]
- * groupByKey([{ name: 'Pedro', age: 20 }, { name: 'João': age: 15 }, { name: 'Maria', age: 20 }], 'age');
+ * groupByKey([{ name: 'Pedro', age: 20 }, { name: 'João', age: 15 }, { name: 'Maria', age: 20 }], 'age');
  */
 export function groupByKey<T, K extends keyof T>(list: T[], key: K) {
   const keys: T[K][] = [];
@@ -196,4 +196,36 @@ export function groupByKey<T, K extends keyof T>(list: T[], key: K) {
     },
     [] as Array<T[]>
   );
+}
+
+type Filter<T> = { key: keyof T; value: T[keyof T] | T[keyof T][] | ((i: T) => boolean) };
+
+/**
+ * Filter array with filters
+ * @example
+ * // returns [ { name: 'Pedro', age: 20 }, { name: 'Maria', age: 20 } ]
+ * filteredList([{ name: 'Pedro', age: 20 }, { name: 'João', age: 15 }, { name: 'Maria', age: 20 }], { key: 'age', value: 20 });
+ */
+export function filteredList<T extends object>(items: T[], filter: Filter<T> | Filter<T>[]) {
+  let list = [...items];
+
+  const filterFn = (f: Filter<T>, i: T) => {
+    return typeof f.value === 'object' && Array.isArray(f.value)
+      ? f.value.length
+        ? f.value.includes(i[f.key])
+        : true
+      : f.value instanceof Function
+        ? f.value(i)
+        : f.value === i[f.key];
+  };
+
+  if (typeof filter === 'object' && Array.isArray(filter)) {
+    for (const f of filter) {
+      list = list.filter(i => filterFn(f, i));
+    }
+  } else {
+    list = list.filter(i => filterFn(filter, i));
+  }
+
+  return list;
 }
