@@ -37,10 +37,10 @@ export function splitArray<T>(array: T[], chunkSize: number) {
  * // returns [ { name: 'Davi' }, { name: 'João' }, { name: 'Maria' }, { name: 'Pedro' } ]
  * [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }].filterBy('name', 'Davi');
  */
-export function filterBy<T, V>(
+export function filterBy<T>(
   array: Array<T>,
   key: keyof T,
-  value: V,
+  value: T[keyof T],
   filterFn?: (i: T) => boolean
 ) {
   if (typeof value !== 'number' && typeof value !== 'boolean' && !value) return array;
