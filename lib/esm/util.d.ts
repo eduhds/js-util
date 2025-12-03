@@ -30,3 +30,10 @@ export declare function getRandomHexColor(): string;
  * isColorLight('#000000');
  */
 export declare function isColorLight(hex: string): boolean;
+/**
+ * Download file from blob
+ * @example
+ * // downloads file from blob
+ * browserDownloadBlob(blob, 'file.pdf', 'application/pdf');
+ */
+export declare function browserDownloadBlob(data: number[] | string | Blob, fileName: string, mimeType: string): void;

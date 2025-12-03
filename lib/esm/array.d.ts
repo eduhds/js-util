@@ -20,9 +20,9 @@ export declare function splitArray<T>(array: T[], chunkSize: number): T[][];
  * Filter array by key and value
  * @example
  * // returns [ { name: 'Davi' }, { name: 'João' }, { name: 'Maria' }, { name: 'Pedro' } ]
- * [{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }].filterBy('name', 'Davi');
+ * filterBy([{ name: 'Pedro' }, { name: 'João' }, { name: 'Maria' }, { name: 'Davi' }], 'name', 'Davi');
  */
-export declare function filterBy<T, V>(array: Array<T>, key: keyof T, value: V, filterFn?: (i: T) => boolean): T[];
+export declare function filterBy<T>(array: Array<T>, key: keyof T, value: T[keyof T], filterFn?: (i: T) => boolean): T[];
 /**
  * Edit array item by index
  * @example
@@ -86,6 +86,18 @@ export declare function shuffle<T>(array: T[]): T[];
  * Group array by key
  * @example
  * // returns [ [ { name: 'Pedro', age: 20 }, { name: 'Maria', age: 20 } ], [ { name: 'João', age: 15 } ] ]
- * groupByKey([{ name: 'Pedro', age: 20 }, { name: 'João': age: 15 }, { name: 'Maria', age: 20 }], 'age');
+ * groupByKey([{ name: 'Pedro', age: 20 }, { name: 'João', age: 15 }, { name: 'Maria', age: 20 }], 'age');
  */
 export declare function groupByKey<T, K extends keyof T>(list: T[], key: K): T[][];
+type Filter<T> = {
+    key: keyof T;
+    value: T[keyof T] | T[keyof T][] | ((i: T) => boolean);
+};
+/**
+ * Filter array with filters
+ * @example
+ * // returns [ { name: 'Pedro', age: 20 }, { name: 'Maria', age: 20 } ]
+ * filteredList([{ name: 'Pedro', age: 20 }, { name: 'João', age: 15 }, { name: 'Maria', age: 20 }], { key: 'age', value: 20 });
+ */
+export declare function filteredList<T extends object>(items: T[], filter: Filter<T> | Filter<T>[]): T[];
+export {};

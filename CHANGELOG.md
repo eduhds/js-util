@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.13.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.12.0...v2.13.0)
+
+### 🚀 Enhancements
+
+- Adicionar função filteredList e testes correspondentes ([5ee8159](https://github.com/eduhds/js-util/commit/5ee8159))
+- Add browserDownloadBlob ([f4bd3cf](https://github.com/eduhds/js-util/commit/f4bd3cf))
+
+### 🩹 Fixes
+
+- Ajustar tipo do parâmetro value na função filterBy ([9298dc2](https://github.com/eduhds/js-util/commit/9298dc2))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.12.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.11.1...v2.12.0)
