@@ -91,3 +91,34 @@ export function isColorLight(hex: string) {
   // If luminance is greater than 128, the color is light
   return luminance > 128;
 }
+
+/**
+ * Download file from blob
+ * @example
+ * // downloads file from blob
+ * browserDownloadBlob(blob, 'file.pdf', 'application/pdf');
+ */
+export function browserDownloadBlob(
+  data: number[] | string | Blob,
+  fileName: string,
+  mimeType: string
+) {
+  const blob =
+    data instanceof Blob
+      ? data
+      : new Blob([typeof data === 'string' ? data : new Uint8Array(data)], {
+          type: mimeType
+        });
+  const url = window.URL.createObjectURL(blob);
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(function () {
+    return window.URL.revokeObjectURL(url);
+  }, 1000);
+}

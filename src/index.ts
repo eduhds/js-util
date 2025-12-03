@@ -50,7 +50,13 @@ export {
   numberFromText,
   titleize
 } from './string';
-export { bytesToSize, getCreditCardBrand, isColorLight, getRandomHexColor } from './util';
+export {
+  bytesToSize,
+  getCreditCardBrand,
+  isColorLight,
+  getRandomHexColor,
+  browserDownloadBlob
+} from './util';
 export {
   cepIsValid,
   cnpjIsValid,
