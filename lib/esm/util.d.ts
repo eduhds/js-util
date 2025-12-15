@@ -37,3 +37,31 @@ export declare function isColorLight(hex: string): boolean;
  * browserDownloadBlob(blob, 'file.pdf', 'application/pdf');
  */
 export declare function browserDownloadBlob(data: number[] | string | Blob, fileName: string, mimeType: string): void;
+/**
+ * Create http client
+ * @experimental
+ */
+export declare function http(): {
+    _baseUrl: string;
+    _protocol: string;
+    _domain: string;
+    _body: any;
+    _headers: Record<string, string>;
+    _query: Record<string, string | number | boolean | null | undefined>;
+    _params: Record<`$${string}`, string>;
+    _paths: readonly string[];
+    url(url: string, ...parameters: [`$${string}`, string][]): any;
+    headers(...keyValuePairs: [string, string][]): any;
+    routes<T extends readonly string[]>(paths: readonly [...T]): import("./@types/object").DeepMerge<import("./@types/object").MergeAll<{ [I in keyof T]: import("./@types/object").SegmentsToObject<T[I], "/", {
+        _body: any;
+        _headers: Record<string, string>;
+        _params: Record<`$${string}`, string>;
+        body(body: any): any;
+        headers(keyValuePairs: [string, string][]): any;
+        get(...parameters: [`$${string}`, string][]): Promise<Response>;
+        post(...parameters: [`$${string}`, string][]): Promise<Response>;
+        put(...parameters: [`$${string}`, string][]): Promise<Response>;
+        patch(...parameters: [`$${string}`, string][]): Promise<Response>;
+        delete(...parameters: [`$${string}`, string][]): Promise<Response>;
+    }>; }>, unknown>;
+};

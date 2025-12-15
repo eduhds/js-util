@@ -1,3 +1,4 @@
+import type { ArgsToMergedObject, DeepMerge, Separator, SplitCharacter } from './@types/object';
 /**
  * Selects and returns the value of the specified property from the given object.
  * @example
@@ -50,3 +51,9 @@ export declare function remapProperties<T extends object, UArr extends readonly 
 export declare function remapProperties<T extends object, UArr extends readonly [readonly (keyof T)[], U][], U extends string | number | symbol = UArr[number][1]>(obj: T, props: UArr, merge: 'merge'): T & {
     [K in UArr[number][1]]: T[keyof T];
 };
+export declare function splitSegmentsToObjectFields<T extends readonly string[], S extends SplitCharacter = '.'>(segments: readonly [...T]): ArgsToMergedObject<T, S, {}>;
+export declare function splitSegmentsToObjectFields<T extends readonly string[], O extends object, F extends any, C extends {
+    separator?: SplitCharacter;
+    initialValue?: O;
+    finalValue?: (index: number) => F;
+}>(segments: readonly [...T], options: C): DeepMerge<ArgsToMergedObject<T, Separator<C['separator']>, C['finalValue'] extends Function ? ReturnType<C['finalValue']> : C['finalValue']>, C['initialValue']>;

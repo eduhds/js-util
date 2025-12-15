@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.14.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.13.0...v2.14.0)
+
+### 🚀 Enhancements
+
+- Add splitSegmentsToObjectFields ([a8d18cd](https://github.com/eduhds/js-util/commit/a8d18cd))
+- Add http ([9b964dc](https://github.com/eduhds/js-util/commit/9b964dc))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.13.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.12.0...v2.13.0)
