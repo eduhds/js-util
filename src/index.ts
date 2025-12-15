@@ -56,7 +56,8 @@ export {
   getCreditCardBrand,
   isColorLight,
   getRandomHexColor,
-  browserDownloadBlob
+  browserDownloadBlob,
+  http
 } from './util';
 export {
   cepIsValid,

@@ -1,4 +1,4 @@
-import { bytesToSize, getCreditCardBrand, getRandomHexColor, isColorLight } from '../src';
+import { bytesToSize, getCreditCardBrand, getRandomHexColor, http, isColorLight } from '../src';
 
 describe('Module "util"', () => {
   test('Transform bytes to size', () => {
@@ -27,4 +27,87 @@ describe('Module "util"', () => {
     expect(isColorLight('#FFFFFF')).toBe(true);
     expect(isColorLight('#000000')).toBe(false);
   });
+
+  test('Http', async () => {
+    expect(http().url).toThrow('url is required');
+
+    const exampleApi = http()
+      .url('https://example.com/api/$version/?a=1&b=2', ['$version', 'v1'])
+      .headers(['Accept', 'application/json'], ['Content-Type', 'application/json']);
+
+    expect(exampleApi._baseUrl).toEqual('https://example.com/api/v1');
+    expect(exampleApi._protocol).toEqual('https');
+    expect(exampleApi._domain).toEqual('example.com');
+    expect(exampleApi._query).toEqual({ a: '1', b: '2' });
+    expect(exampleApi._params).toHaveProperty('$version');
+    expect(exampleApi._headers).toEqual({
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    });
+    expect(exampleApi.routes(['users', 'user', 'user/$id']).users.get).toBeInstanceOf(Function);
+    expect(exampleApi.routes(['users', 'user', 'user/$id']).user.get).toBeInstanceOf(Function);
+    expect(exampleApi.routes(['users', 'user', 'user/$id']).user.$id.get).toBeInstanceOf(Function);
+
+    const todoApi = http()
+      .url('https://api.freeapi.app/api/v1')
+      .routes([
+        'public/quotes/quote/random',
+        'todos',
+        'todos/$todoId',
+        'todos/toggle/status/$todoId'
+      ]);
+
+    expect(await (await todoApi.public.quotes.quote.random.get()).json()).toMatchObject({
+      message: 'Quote fetched successfully',
+      success: true
+    });
+
+    expect(await (await todoApi.todos.get()).json()).toMatchObject({
+      message: 'Todos fetched successfully',
+      success: true
+    });
+
+    const res = await (
+      await todoApi.todos
+        .headers([['Content-Type', 'application/json']])
+        .body(JSON.stringify({ description: 'Some description', title: 'Some title' }))
+        .post()
+    ).json();
+    expect(res).toMatchObject({
+      message: 'Todo created successfully',
+      success: true
+    });
+
+    expect(await (await todoApi.todos.$todoId.get(['$todoId', res.data._id])).json()).toMatchObject(
+      {
+        message: 'Todo fetched successfully',
+        success: true
+      }
+    );
+
+    expect(
+      await (await todoApi.todos.toggle.status.$todoId.patch(['$todoId', res.data._id])).json()
+    ).toMatchObject({
+      message: 'done',
+      success: true
+    });
+
+    expect(
+      await (
+        await todoApi.todos.$todoId
+          .body(JSON.stringify({ description: 'Other description', title: 'Other title' }))
+          .patch(['$todoId', res.data._id])
+      ).json()
+    ).toMatchObject({
+      message: 'Todo updated successfully',
+      success: true
+    });
+
+    expect(
+      await (await todoApi.todos.$todoId.delete(['$todoId', res.data._id])).json()
+    ).toMatchObject({
+      message: 'Todo deleted successfully',
+      success: true
+    });
+  }, 10000);
 });
