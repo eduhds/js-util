@@ -38,7 +38,8 @@ export {
   setValueAtPath,
   jsonToBlob,
   blobToJson,
-  remapProperties
+  remapProperties,
+  splitSegmentsToObjectFields
 } from './object';
 export {
   capitalize,

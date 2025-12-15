@@ -1,3 +1,5 @@
+import type { ArgsToMergedObject, DeepMerge, Separator, SplitCharacter } from './@types/object';
+
 /**
  * Selects and returns the value of the specified property from the given object.
  * @example
@@ -153,4 +155,55 @@ export function remapProperties(obj: any, props: any, merge?: any) {
   }
 
   return newObj;
+}
+
+export function splitSegmentsToObjectFields<
+  T extends readonly string[],
+  S extends SplitCharacter = '.'
+>(segments: readonly [...T]): ArgsToMergedObject<T, S, {}>; // Sem options
+
+export function splitSegmentsToObjectFields<
+  T extends readonly string[],
+  O extends object,
+  F extends any,
+  C extends {
+    separator?: SplitCharacter;
+    initialValue?: O;
+    finalValue?: (index: number) => F;
+  }
+>(
+  segments: readonly [...T],
+  options: C
+): DeepMerge<
+  ArgsToMergedObject<
+    T,
+    Separator<C['separator']>,
+    C['finalValue'] extends Function ? ReturnType<C['finalValue']> : C['finalValue']
+  >,
+  C['initialValue']
+>; // Com options
+
+export function splitSegmentsToObjectFields(segments: any, options?: any) {
+  let result: any = options?.initialValue ? { ...options.initialValue } : {};
+
+  for (const seg of segments) {
+    const parts = seg.split(options?.separator || '.');
+    let current = result;
+    for (const part of parts) {
+      if (part === parts[parts.length - 1]) {
+        current[part] =
+          current[part] ||
+          (options?.finalValue
+            ? options.finalValue instanceof Function
+              ? options.finalValue(segments.indexOf(seg))
+              : undefined
+            : {});
+      } else {
+        current[part] = current[part] || {};
+      }
+      current = current[part];
+    }
+  }
+
+  return result;
 }

@@ -4,7 +4,8 @@ import {
   jsonToBlob,
   keySelect,
   remapProperties,
-  setValueAtPath
+  setValueAtPath,
+  splitSegmentsToObjectFields
 } from '../src';
 
 const france = {
@@ -151,5 +152,36 @@ describe('Module "object"', () => {
       ...user,
       id: user['id-user']
     });
+  });
+
+  test('Split segments into object fields', () => {
+    const fooBarBaz = { foo: { bar: { baz: {} } } };
+
+    expect(splitSegmentsToObjectFields(['foo.bar.baz'])).toEqual(fooBarBaz);
+    expect(splitSegmentsToObjectFields(['foo,bar,baz'], { separator: ',' })).toEqual(fooBarBaz);
+    expect(splitSegmentsToObjectFields(['foo/bar/baz'], { separator: '/' })).toEqual(fooBarBaz);
+    expect(splitSegmentsToObjectFields(['foo|bar|baz'], { separator: '|' })).toEqual(fooBarBaz);
+
+    expect(splitSegmentsToObjectFields(['foo.bar.baz']).foo.bar.baz).toEqual(fooBarBaz.foo.bar.baz);
+
+    const initialValue = { foo: { oof: null }, oof: null };
+
+    expect(splitSegmentsToObjectFields(['foo.bar.baz'], { initialValue })).toEqual({
+      ...fooBarBaz,
+      ...initialValue
+    });
+
+    expect(splitSegmentsToObjectFields(['foo.bar.baz'], { initialValue }).oof).toBeNull();
+    expect(splitSegmentsToObjectFields(['foo.bar.baz'], { initialValue }).foo.oof).toBeNull();
+
+    expect(
+      splitSegmentsToObjectFields(['foo.bar.baz'], { finalValue: () => 'end' }).foo.bar.baz
+    ).toEqual('end');
+    expect(
+      splitSegmentsToObjectFields(['foo.bar.baz'], { finalValue: () => true }).foo.bar.baz
+    ).toEqual(true);
+    expect(
+      splitSegmentsToObjectFields(['foo.bar.baz'], { finalValue: () => [] }).foo.bar.baz
+    ).toEqual([]);
   });
 });
