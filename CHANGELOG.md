@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.14.1
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.14.0...v2.14.1)
+
+### 🩹 Fixes
+
+- SplitSegmentsToObjectFields types ([705dcc9](https://github.com/eduhds/js-util/commit/705dcc9))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.14.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.13.0...v2.14.0)

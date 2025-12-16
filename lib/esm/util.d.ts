@@ -52,7 +52,7 @@ export declare function http(): {
     _paths: readonly string[];
     url(url: string, ...parameters: [`$${string}`, string][]): any;
     headers(...keyValuePairs: [string, string][]): any;
-    routes<T extends readonly string[]>(paths: readonly [...T]): import("./@types/object").DeepMerge<import("./@types/object").MergeAll<{ [I in keyof T]: import("./@types/object").SegmentsToObject<T[I], "/", {
+    routes<T extends readonly string[]>(paths: readonly [...T]): import("./@types/object").DeepMerge<import("./@types/object").MergeAll<{ [I in keyof T]: T[I] extends infer T_1 ? T_1 extends T[I] ? T_1 extends `${infer H}/${infer R}` ? { [K in H]: R extends `${infer H}/${infer R}` ? any : { [K_1 in R]: {
         _body: any;
         _headers: Record<string, string>;
         _params: Record<`$${string}`, string>;
@@ -63,5 +63,16 @@ export declare function http(): {
         put(...parameters: [`$${string}`, string][]): Promise<Response>;
         patch(...parameters: [`$${string}`, string][]): Promise<Response>;
         delete(...parameters: [`$${string}`, string][]): Promise<Response>;
-    }>; }>, unknown>;
+    }; }; } : { [K_2 in T_1]: {
+        _body: any;
+        _headers: Record<string, string>;
+        _params: Record<`$${string}`, string>;
+        body(body: any): any;
+        headers(keyValuePairs: [string, string][]): any;
+        get(...parameters: [`$${string}`, string][]): Promise<Response>;
+        post(...parameters: [`$${string}`, string][]): Promise<Response>;
+        put(...parameters: [`$${string}`, string][]): Promise<Response>;
+        patch(...parameters: [`$${string}`, string][]): Promise<Response>;
+        delete(...parameters: [`$${string}`, string][]): Promise<Response>;
+    }; } : never : never; }>, unknown>;
 };
