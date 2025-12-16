@@ -183,6 +183,12 @@ export function splitSegmentsToObjectFields<
   C['initialValue']
 >; // Com options
 
+/**
+ * Split strings by separator and return a nested object.
+ * @example
+ * // returns { foo: { bar: { baz: {} } } }
+ * splitSegmentsToObjectFields(['foo.bar.baz']);
+ */
 export function splitSegmentsToObjectFields(segments: any, options?: any) {
   let result: any = options?.initialValue ? { ...options.initialValue } : {};
 
