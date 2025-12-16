@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.14.2
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.14.1...v2.14.2)
+
+### 🩹 Fixes
+
+- Comment tsconfig module ([027a6ba](https://github.com/eduhds/js-util/commit/027a6ba))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.14.1
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.14.0...v2.14.1)
