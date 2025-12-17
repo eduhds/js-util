@@ -1,3 +1,4 @@
+import { SplitCharacter } from './@types/object';
 import { splitSegmentsToObjectFields } from './object';
 
 /**
@@ -228,7 +229,10 @@ export function http() {
       this._headers = kvPairsToRecord(keyValuePairs, this._headers);
       return this;
     },
-    routes<T extends readonly string[]>(paths: readonly [...T]) {
+    routes<T extends readonly string[], S extends SplitCharacter = '/'>(
+      paths: readonly [...T],
+      separator: S = '/' as S
+    ) {
       this._paths = paths;
 
       for (const path of paths) {
@@ -236,7 +240,7 @@ export function http() {
       }
 
       return splitSegmentsToObjectFields(paths, {
-        separator: '/',
+        separator,
         finalValue: index => {
           const _body: any = undefined;
 
