@@ -97,3 +97,31 @@ export type DeepMerge<A, B> = {
 };
 
 export type Separator<S> = S extends SplitCharacter ? S : '.';
+
+// Utility types to generate all possible paths in an object
+// Get the element type of an array
+type ArrayElement<T> = T extends readonly (infer U)[] ? U : never;
+
+// Generate paths for a type, handling both objects and arrays
+type PathKeys<T, Prefix extends string = ''> = T extends object
+  ? {
+      [K in keyof T]: K extends string | number
+        ? T[K] extends readonly any[]
+          ? ArrayElement<T[K]> extends object
+            ? // Array of objects: allow numeric indices and continue path recursively
+              | `${Prefix}${K}`
+                | `${Prefix}${K}.${number}`
+                | PathKeys<ArrayElement<T[K]>, `${Prefix}${K}.${number}.`>
+            : // Array of primitives: just allow numeric indices
+              `${Prefix}${K}` | `${Prefix}${K}.${number}`
+          : T[K] extends object
+            ? // Nested object: continue path recursively
+              `${Prefix}${K}` | PathKeys<T[K], `${Prefix}${K}.`>
+            : // Primitive value: just the key
+              `${Prefix}${K}`
+        : never;
+    }[keyof T]
+  : never;
+
+// Main type that generates all possible paths
+export type DeepKey<T> = PathKeys<T> extends infer U ? (U extends string ? U : never) : never;

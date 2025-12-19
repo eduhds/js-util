@@ -3,6 +3,7 @@ import {
   getValueAtPath,
   jsonToBlob,
   keySelect,
+  listObjectDeepKeys,
   remapProperties,
   setValueAtPath,
   splitSegmentsToObjectFields
@@ -183,5 +184,13 @@ describe('Module "object"', () => {
     expect(
       splitSegmentsToObjectFields(['foo.bar.baz'], { finalValue: () => [] }).foo.bar.baz
     ).toEqual([]);
+  });
+
+  test('List object deep keys', () => {
+    expect(listObjectDeepKeys({ foo: { bar: { baz: '' } } })).toEqual([
+      ['foo', 'object'],
+      ['foo.bar', 'object'],
+      ['foo.bar.baz', 'string']
+    ]);
   });
 });

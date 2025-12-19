@@ -1,4 +1,10 @@
-import type { ArgsToMergedObject, DeepMerge, Separator, SplitCharacter } from './@types/object';
+import type {
+  ArgsToMergedObject,
+  DeepKey,
+  DeepMerge,
+  Separator,
+  SplitCharacter
+} from './@types/object';
 
 /**
  * Selects and returns the value of the specified property from the given object.
@@ -212,4 +218,28 @@ export function splitSegmentsToObjectFields(segments: any, options?: any) {
   }
 
   return result;
+}
+
+/**
+ * Returns a list of object deep keys.
+ * @example
+ * // returns [['foo', 'object'], ['foo.bar', 'object'], ['foo.bar.baz', 'string']]
+ * listObjectDeepKeys({ foo: { bar: { baz: '' } } });
+ */
+export function listObjectDeepKeys<T extends object>(obj: T, prefix: string = '') {
+  type TKey = DeepKey<T>;
+
+  let keysAndTypes = [] as [TKey[number], string][];
+
+  for (const key in obj) {
+    const path = prefix ? `${prefix}.${key}` : key;
+
+    keysAndTypes.push([path as TKey[number], typeof obj[key]]);
+
+    if (typeof obj[key] === 'object') {
+      keysAndTypes = [...keysAndTypes, ...listObjectDeepKeys(obj[key] as object, path)];
+    }
+  }
+
+  return keysAndTypes;
 }

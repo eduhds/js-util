@@ -39,7 +39,8 @@ export {
   jsonToBlob,
   blobToJson,
   remapProperties,
-  splitSegmentsToObjectFields
+  splitSegmentsToObjectFields,
+  listObjectDeepKeys
 } from './object';
 export {
   capitalize,
