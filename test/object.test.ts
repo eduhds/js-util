@@ -192,5 +192,24 @@ describe('Module "object"', () => {
       ['foo.bar', 'object'],
       ['foo.bar.baz', 'string']
     ]);
+
+    expect(
+      listObjectDeepKeys({ foo: { bar: { baz: [{ oof: { rab: '' } }, '', false] } } })
+    ).toEqual([
+      ['foo', 'object'],
+      ['foo.bar', 'object'],
+      ['foo.bar.baz', 'object'],
+      ['foo.bar.baz.0', 'object'],
+      ['foo.bar.baz.0.oof', 'object'],
+      ['foo.bar.baz.0.oof.rab', 'string'],
+      ['foo.bar.baz.1', 'string'],
+      ['foo.bar.baz.2', 'boolean']
+    ]);
+
+    expect(listObjectDeepKeys([1, 2, 3])).toEqual([
+      ['0', 'number'],
+      ['1', 'number'],
+      ['2', 'number']
+    ]);
   });
 });
