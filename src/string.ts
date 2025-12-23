@@ -79,3 +79,65 @@ export function extensionFromFileName(fileName: string) {
   let extension = reversed.slice(0, reversed.indexOf('.')).reverse().join('');
   return extension;
 }
+
+/**
+ * Parse url
+ */
+export function parseUrl(url: string) {
+  if (!url) throw new Error('url is required');
+
+  function findParams(url: string, delimiter: '$' | '{}' | ':' = '$') {
+    return url.split('/').reduce(
+      (acc, part) => {
+        const param = part.startsWith(delimiter.at(0) || '$') ? part : undefined;
+        if (param) {
+          acc[param] = typeof undefined;
+        }
+        return acc;
+      },
+      {} as Record<string, string>
+    );
+  }
+
+  function replaceParams(url: string, params: Record<string, string>) {
+    for (const param in params) {
+      url = url.replace(param, params[param]);
+    }
+    return url;
+  }
+
+  function normalizeUrl(url: string) {
+    return url.replace(/\/+/g, '/').replace(':/', '://');
+  }
+
+  const [partialUrl, queryString] = url.trim().split('?');
+
+  const query = queryString
+    ? queryString.split('&').reduce(
+        (acc, param) => {
+          const [key, value] = param.split('=');
+          acc[key] = value;
+          return acc;
+        },
+        {} as Record<string, string>
+      )
+    : {};
+
+  const [protocol, address] = partialUrl.split('://');
+  if (protocol !== 'http' && protocol !== 'https') {
+    throw new Error('Invalid protocol');
+  }
+
+  const [domainWithSubdomains, ...path] = address.split('/').filter(Boolean);
+
+  const domain = domainWithSubdomains; //.split('.').slice(-1)[0];
+  const subdomains = domainWithSubdomains.split('.').slice(0, -1);
+
+  const params = findParams(path.join('/'));
+
+  const baseUrl = normalizeUrl(
+    replaceParams([`${protocol}://${domainWithSubdomains}`, ...path].join('/'), params)
+  );
+
+  return { url, baseUrl, protocol, domain, subdomains, query, params, findParams, replaceParams };
+}

@@ -1,11 +1,12 @@
 import {
+  capitalize,
+  extensionFromFileName,
+  fileNameFromPath,
   formatMoneyBR,
   formatPlacaOld,
   normalizeLower,
-  capitalize,
   numberFromText,
-  fileNameFromPath,
-  extensionFromFileName,
+  parseUrl,
   titleize
 } from '../src';
 
@@ -48,5 +49,22 @@ describe('Module "string"', () => {
 
   test('extensionFromFileName', () => {
     expect(extensionFromFileName('file.txt')).toBe('txt');
+  });
+
+  test('parseUrl', () => {
+    expect(parseUrl).toThrow('url is required');
+
+    const result = parseUrl('https://example.com/api/$version/?a=1&b=2');
+
+    expect(result.baseUrl).toEqual('https://example.com/api/undefined');
+    expect(result.protocol).toEqual('https');
+    expect(result.domain).toEqual('example.com');
+    expect(result.query).toEqual({ a: '1', b: '2' });
+    expect(result.params).toHaveProperty('$version');
+    expect(result.params['$version']).toEqual(typeof undefined);
+
+    expect(result.replaceParams(result.url, { $version: 'v1' })).toEqual(
+      'https://example.com/api/v1/?a=1&b=2'
+    );
   });
 });

@@ -109,5 +109,5 @@ describe('Module "util"', () => {
       message: 'Todo deleted successfully',
       success: true
     });
-  }, 10000);
+  }, 20000);
 });

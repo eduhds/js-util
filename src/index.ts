@@ -50,7 +50,8 @@ export {
   formatPlacaOld,
   normalizeLower,
   numberFromText,
-  titleize
+  titleize,
+  parseUrl
 } from './string';
 export {
   bytesToSize,
