@@ -54,17 +54,21 @@ describe('Module "string"', () => {
   test('parseUrl', () => {
     expect(parseUrl).toThrow('url is required');
 
-    const result = parseUrl('https://example.com/api/$version/?a=1&b=2');
+    const url = 'https://example.com/api';
 
-    expect(result.baseUrl).toEqual('https://example.com/api/undefined');
-    expect(result.protocol).toEqual('https');
-    expect(result.domain).toEqual('example.com');
-    expect(result.query).toEqual({ a: '1', b: '2' });
-    expect(result.params).toHaveProperty('$version');
-    expect(result.params['$version']).toEqual(typeof undefined);
+    expect(parseUrl(url).baseUrl).toEqual(url);
+    expect(parseUrl(url).protocol).toEqual('https');
+    expect(parseUrl(url).domain).toEqual('example.com');
+    expect(parseUrl(url + '?a=1&b=2').query).toEqual({ a: '1', b: '2' });
+    expect(parseUrl(url + '/$version').params).toHaveProperty('$version');
 
-    expect(result.replaceParams(result.url, { $version: 'v1' })).toEqual(
-      'https://example.com/api/v1/?a=1&b=2'
+    const fullUrl = 'https://example.com/api/$version/?a=1&b=2';
+
+    expect(parseUrl(fullUrl).baseUrl).toEqual(fullUrl.split('?')[0].slice(0, -1));
+    expect(parseUrl(fullUrl).params?.['$version']).toEqual(typeof undefined);
+    expect(parseUrl(fullUrl, { $version: 'v1' }).params?.['$version']).toEqual('v1');
+    expect(parseUrl(fullUrl).replaceParams({ $version: 'v1' })).toEqual(
+      fullUrl.split('?')[0].slice(0, -1).replace('$version', 'v1')
     );
   });
 });

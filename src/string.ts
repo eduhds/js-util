@@ -83,15 +83,15 @@ export function extensionFromFileName(fileName: string) {
 /**
  * Parse url
  */
-export function parseUrl(url: string) {
+export function parseUrl(url: string, parameters = {} as Record<string, string>) {
   if (!url) throw new Error('url is required');
 
-  function findParams(url: string, delimiter: '$' | '{}' | ':' = '$') {
+  function resolveParams(values: Record<string, string>, delimiter: '$' | '{}' | ':' = '$') {
     return url.split('/').reduce(
       (acc, part) => {
         const param = part.startsWith(delimiter.at(0) || '$') ? part : undefined;
         if (param) {
-          acc[param] = typeof undefined;
+          acc[param] = values[param] || typeof undefined;
         }
         return acc;
       },
@@ -99,18 +99,20 @@ export function parseUrl(url: string) {
     );
   }
 
-  function replaceParams(url: string, params: Record<string, string>) {
+  function replaceParams(params: Record<string, string>) {
     for (const param in params) {
       url = url.replace(param, params[param]);
     }
     return url;
   }
 
-  function normalizeUrl(url: string) {
-    return url.replace(/\/+/g, '/').replace(':/', '://');
-  }
+  let queryString = '';
+  [url, queryString] = url.trim().split('?');
 
-  const [partialUrl, queryString] = url.trim().split('?');
+  // remove trailing slash
+  if (url.endsWith('/')) {
+    url = url.slice(0, url.length - 1);
+  }
 
   const query = queryString
     ? queryString.split('&').reduce(
@@ -123,21 +125,31 @@ export function parseUrl(url: string) {
       )
     : {};
 
-  const [protocol, address] = partialUrl.split('://');
+  const [protocol, address] = url.split('://');
   if (protocol !== 'http' && protocol !== 'https') {
     throw new Error('Invalid protocol');
   }
 
-  const [domainWithSubdomains, ...path] = address.split('/').filter(Boolean);
+  const [domain] = address.split('/').filter(Boolean);
 
-  const domain = domainWithSubdomains; //.split('.').slice(-1)[0];
-  const subdomains = domainWithSubdomains.split('.').slice(0, -1);
+  const params = resolveParams(parameters);
 
-  const params = findParams(path.join('/'));
+  if (Object.keys(parameters).length) {
+    replaceParams(params);
+  }
 
-  const baseUrl = normalizeUrl(
-    replaceParams([`${protocol}://${domainWithSubdomains}`, ...path].join('/'), params)
-  );
+  // normalize url
+  url.replace(/\/+/g, '/').replace(':/', '://');
 
-  return { url, baseUrl, protocol, domain, subdomains, query, params, findParams, replaceParams };
+  const baseUrl = url;
+
+  return {
+    baseUrl,
+    protocol,
+    domain,
+    query,
+    params,
+    resolveParams,
+    replaceParams
+  };
 }
