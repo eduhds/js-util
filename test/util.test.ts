@@ -40,13 +40,17 @@ describe('Module "util"', () => {
     expect(exampleApi._domain).toEqual('example.com');
     expect(exampleApi._query).toEqual({ a: '1', b: '2' });
     expect(exampleApi._params).toHaveProperty('$version');
+    expect(exampleApi._params?.['$version']).toEqual('v1');
     expect(exampleApi._headers).toEqual({
       Accept: 'application/json',
       'Content-Type': 'application/json'
     });
-    expect(exampleApi.routes(['users', 'user', 'user/$id']).users.get).toBeInstanceOf(Function);
-    expect(exampleApi.routes(['users', 'user', 'user/$id']).user.get).toBeInstanceOf(Function);
-    expect(exampleApi.routes(['users', 'user', 'user/$id']).user.$id.get).toBeInstanceOf(Function);
+
+    const exampleRoutes = exampleApi.routes(['users', 'user', 'user/$id']);
+
+    expect(exampleRoutes.users.get).toBeInstanceOf(Function);
+    expect(exampleRoutes.user.get).toBeInstanceOf(Function);
+    expect(exampleRoutes.user.$id.get).toBeInstanceOf(Function);
 
     const todoApi = http()
       .url('https://api.freeapi.app/api/v1')
@@ -69,7 +73,7 @@ describe('Module "util"', () => {
 
     const res = await (
       await todoApi.todos
-        .headers([['Content-Type', 'application/json']])
+        .headers(['Content-Type', 'application/json'])
         .body(JSON.stringify({ description: 'Some description', title: 'Some title' }))
         .post()
     ).json();

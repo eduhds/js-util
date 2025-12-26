@@ -1,5 +1,6 @@
 import { SplitCharacter } from './@types/object';
 import { splitSegmentsToObjectFields } from './object';
+import { parseUrl } from './string';
 
 /**
  * Transform bytes to size
@@ -134,40 +135,9 @@ export function http() {
   type KVPairs<K = string, V = string> = [K, V][];
   type Param<T extends string = string> = `\$${T}`;
 
-  const _baseUrl = '';
-  const _protocol = '';
-  const _domain = '';
-  const _body: any = undefined;
-  const _headers = {} as Record<string, string>;
-  const _query = {} as Record<string, string | number | boolean | undefined | null>;
-  const _params = {} as Record<Param, string>;
-
-  const _paths: readonly string[] = [];
-
-  function request(...args: Parameters<typeof fetch>) {
-    return fetch(...args);
-  }
-
-  function findParams(url: string, params: typeof _params) {
-    return url.split('/').reduce((acc, part) => {
-      const param = part.startsWith('$') ? (part as Param) : undefined;
-      if (param) {
-        acc[param] = String(undefined);
-      }
-      return acc;
-    }, params);
-  }
-
-  function replaceParams(url: string, params: typeof _params) {
-    for (const param in params) {
-      url = url.replace(param, params[param as Param]);
-    }
-    return url;
-  }
-
   function kvPairsToRecord<K extends string, V>(
     keyValuePairs: KVPairs<K, V>,
-    record: Record<K, V>
+    record = {} as Record<K, V>
   ) {
     return keyValuePairs.reduce((acc, [key, value]) => {
       acc[key] = value;
@@ -175,46 +145,75 @@ export function http() {
     }, record);
   }
 
-  function normalizeUrl(url: string) {
-    return url.replace(/\/+/g, '/').replace(':/', '://');
-  }
+  class Http {
+    _headers?: Record<string, string>;
+    _baseUrl?: string;
+    _protocol?: string;
+    _domain?: string;
+    _body: any;
+    _query?: Record<string, string | number | boolean | undefined | null>;
+    _params?: Record<Param, string>;
+    _paths?: readonly string[];
 
-  return {
-    _baseUrl,
-    _protocol,
-    _domain,
-    _body,
-    _headers,
-    _query,
-    _params,
-    _paths,
-    url(url: string, ...parameters: KVPairs<Param, string>) {
-      if (!url) throw new Error('url is required');
+    #endpoint: string = '';
 
-      const [partialUrl, queryString] = url.trim().split('?');
-
-      const query = queryString
-        ? queryString.split('&').reduce((acc, param) => {
-            const [key, value] = param.split('=');
-            acc[key] = value;
-            return acc;
-          }, this._query)
-        : {};
-
-      const [protocol, address] = partialUrl.split('://');
-      if (protocol !== 'http' && protocol !== 'https') {
-        throw new Error('Invalid protocol');
+    constructor(instance?: Http) {
+      if (instance) {
+        this._headers = instance._headers;
+        this._baseUrl = instance._baseUrl;
+        this._protocol = instance._protocol;
+        this._domain = instance._domain;
+        this._body = instance._body;
+        this._query = instance._query;
+        this._params = instance._params;
+        this._paths = instance._paths;
       }
+    }
 
-      const [domain, ...path] = address.split('/').filter(Boolean);
+    body(body: any) {
+      this._body = body;
+      return this;
+    }
 
-      const params = findParams(path.join('/'), _params);
+    headers(...keyValuePairs: KVPairs) {
+      this._headers = kvPairsToRecord(keyValuePairs, this._headers || {});
+      return this;
+    }
 
-      const baseUrl = normalizeUrl(
-        replaceParams(
-          [`${protocol}://${domain}`, ...path].join('/'),
-          kvPairsToRecord(parameters, params)
-        )
+    /* request(...args: Parameters<typeof fetch>) {
+    return fetch(...args);
+    } */
+
+    request(method: string) {
+      const { _baseUrl, _headers: headers, _body: body, _params } = this;
+      const { baseUrl: url } = parseUrl([_baseUrl, this.#endpoint].join('/'), _params);
+      return fetch(url, { method, headers, body });
+    }
+
+    routes<T extends readonly string[], S extends SplitCharacter = '/'>(
+      paths: readonly [...T],
+      separator: S = '/' as S
+    ) {
+      this._paths = paths;
+
+      /* for (const path of paths) {
+        this._params = findParams(path, this._params);
+        } */
+
+      return splitSegmentsToObjectFields(paths, {
+        separator,
+        finalValue: index => {
+          const instance = new Http(this);
+          instance.#endpoint = this._paths![index];
+          return instance;
+        }
+      });
+    }
+
+    url(url: string, ...parameters: KVPairs<Param, string>) {
+      const { baseUrl, protocol, domain, query, params } = parseUrl(
+        url,
+        kvPairsToRecord(parameters)
       );
 
       this._baseUrl = baseUrl;
@@ -224,70 +223,35 @@ export function http() {
       this._params = params;
 
       return this;
-    },
-    headers(...keyValuePairs: KVPairs) {
-      this._headers = kvPairsToRecord(keyValuePairs, this._headers);
-      return this;
-    },
-    routes<T extends readonly string[], S extends SplitCharacter = '/'>(
-      paths: readonly [...T],
-      separator: S = '/' as S
-    ) {
-      this._paths = paths;
-
-      for (const path of paths) {
-        this._params = findParams(path, this._params);
-      }
-
-      return splitSegmentsToObjectFields(paths, {
-        separator,
-        finalValue: index => {
-          const _body: any = undefined;
-
-          const url = normalizeUrl([this._baseUrl, this._paths[index]].join('/'));
-
-          const requestFn = (method: string, config: any) => {
-            const { _headers: headers, _body: body, _params } = config;
-            return request(replaceParams(url, _params), { method, headers, body });
-          };
-
-          return {
-            _body,
-            _headers: this._headers,
-            _params: this._params,
-            body(body: any) {
-              this._body = body;
-              return this;
-            },
-            headers(keyValuePairs: KVPairs) {
-              this._headers = kvPairsToRecord(keyValuePairs, this._headers);
-              return this;
-            },
-            get(...parameters: KVPairs<Param, string>) {
-              const _params = kvPairsToRecord(parameters, { ...this._params });
-              return requestFn('GET', { ...this, _params });
-            },
-            post(...parameters: KVPairs<Param, string>) {
-              const _params = kvPairsToRecord(parameters, { ...this._params });
-              return requestFn('POST', { ...this, _params });
-            },
-            put(...parameters: KVPairs<Param, string>) {
-              const _params = kvPairsToRecord(parameters, { ...this._params });
-              return requestFn('PUT', { ...this, _params });
-            },
-            patch(...parameters: KVPairs<Param, string>) {
-              const _params = kvPairsToRecord(parameters, { ...this._params });
-              return requestFn('PATCH', { ...this, _params });
-            },
-            delete(...parameters: KVPairs<Param, string>) {
-              const _params = kvPairsToRecord(parameters, { ...this._params });
-              return requestFn('DELETE', { ...this, _params });
-            }
-          };
-        }
-      });
     }
-  };
+
+    get(...parameters: KVPairs<Param, string>) {
+      this._params = kvPairsToRecord(parameters, { ...this._params });
+      return this.request('GET');
+    }
+
+    post(...parameters: KVPairs<Param, string>) {
+      this._params = kvPairsToRecord(parameters, { ...this._params });
+      return this.request('POST');
+    }
+
+    put(...parameters: KVPairs<Param, string>) {
+      this._params = kvPairsToRecord(parameters, { ...this._params });
+      return this.request('PUT');
+    }
+
+    patch(...parameters: KVPairs<Param, string>) {
+      this._params = kvPairsToRecord(parameters, { ...this._params });
+      return this.request('PATCH');
+    }
+
+    delete(...parameters: KVPairs<Param, string>) {
+      this._params = kvPairsToRecord(parameters, { ...this._params });
+      return this.request('DELETE');
+    }
+  }
+
+  return new Http();
 }
 
 /* // Utilitário para transformar union de objetos em interseção (merge de propriedades)
