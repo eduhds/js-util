@@ -37,3 +37,15 @@ export declare function fileNameFromPath(path: string): string;
  * Get extension from file name string
  */
 export declare function extensionFromFileName(fileName: string): string;
+/**
+ * Parse url
+ */
+export declare function parseUrl(url: string, parameters?: Record<string, string>): {
+    baseUrl: string;
+    protocol: string;
+    domain: string;
+    query: Record<string, string>;
+    params: Record<string, string>;
+    resolveParams: (values: Record<string, string>, delimiter?: '$' | '{}' | ':') => Record<string, string>;
+    replaceParams: (params: Record<string, string>) => string;
+};

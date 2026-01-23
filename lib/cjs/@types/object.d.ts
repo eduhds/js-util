@@ -32,3 +32,11 @@ export type DeepMerge<A, B> = {
     [K in keyof A | keyof B]: K extends keyof A ? K extends keyof B ? DeepMerge<A[K], B[K]> : A[K] : K extends keyof B ? B[K] : never;
 };
 export type Separator<S> = S extends SplitCharacter ? S : '.';
+type ArrayElement<T> = T extends readonly (infer U)[] ? U : never;
+type PathKeys<T, Prefix extends string = ''> = T extends object ? {
+    [K in keyof T]: K extends string | number ? T[K] extends readonly any[] ? ArrayElement<T[K]> extends object ? `${Prefix}${K}` | `${Prefix}${K}.${number}` | PathKeys<ArrayElement<T[K]>, `${Prefix}${K}.${number}.`> : // Array of primitives: just allow numeric indices
+    `${Prefix}${K}` | `${Prefix}${K}.${number}` : T[K] extends object ? // Nested object: continue path recursively
+    `${Prefix}${K}` | PathKeys<T[K], `${Prefix}${K}.`> : `${Prefix}${K}` : never;
+}[keyof T] : never;
+export type DeepKey<T> = PathKeys<T> extends infer U ? (U extends string ? U : never) : never;
+export {};

@@ -1,4 +1,4 @@
-import type { ArgsToMergedObject, DeepMerge, Separator, SplitCharacter } from './@types/object';
+import type { ArgsToMergedObject, DeepKey, DeepMerge, Separator, SplitCharacter } from './@types/object';
 /**
  * Selects and returns the value of the specified property from the given object.
  * @example
@@ -57,3 +57,10 @@ export declare function splitSegmentsToObjectFields<T extends readonly string[],
     initialValue?: O;
     finalValue?: (index: number) => F;
 }>(segments: readonly [...T], options: C): DeepMerge<ArgsToMergedObject<T, Separator<C['separator']>, C['finalValue'] extends Function ? ReturnType<C['finalValue']> : C['finalValue']>, C['initialValue']>;
+/**
+ * Returns a list of object deep keys.
+ * @example
+ * // returns [['foo', 'object'], ['foo.bar', 'object'], ['foo.bar.baz', 'string']]
+ * listObjectDeepKeys({ foo: { bar: { baz: '' } } });
+ */
+export declare function listObjectDeepKeys<T extends object>(obj: T, prefix?: string): [DeepKey<T>[number], string][];

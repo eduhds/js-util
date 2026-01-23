@@ -1,5 +1,29 @@
 # Changelog
 
+## v2.15.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.14.2...v2.15.0)
+
+### 🚀 Enhancements
+
+- Add listObjectDeepKeys ([0cb3854](https://github.com/eduhds/js-util/commit/0cb3854))
+- Add parseUrl ([f5774b8](https://github.com/eduhds/js-util/commit/f5774b8))
+- Add http config ([6c5f8f7](https://github.com/eduhds/js-util/commit/6c5f8f7))
+
+### 🩹 Fixes
+
+- Http routes parameters ([b8896ac](https://github.com/eduhds/js-util/commit/b8896ac))
+- Add listObjectDeepKeys tests ([1a9d8d5](https://github.com/eduhds/js-util/commit/1a9d8d5))
+- ParseUrl improvements ([0be2577](https://github.com/eduhds/js-util/commit/0be2577))
+
+### 💅 Refactors
+
+- Http ([dd1b94e](https://github.com/eduhds/js-util/commit/dd1b94e))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.14.2
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.14.1...v2.14.2)

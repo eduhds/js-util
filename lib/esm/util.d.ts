@@ -1,3 +1,4 @@
+import { SplitCharacter } from './@types/object';
 /**
  * Transform bytes to size
  * @example
@@ -42,37 +43,25 @@ export declare function browserDownloadBlob(data: number[] | string | Blob, file
  * @experimental
  */
 export declare function http(): {
-    _baseUrl: string;
-    _protocol: string;
-    _domain: string;
+    _headers?: Record<string, string> | undefined;
+    _baseUrl?: string | undefined;
+    _protocol?: string | undefined;
+    _domain?: string | undefined;
     _body: any;
-    _headers: Record<string, string>;
-    _query: Record<string, string | number | boolean | null | undefined>;
-    _params: Record<`$${string}`, string>;
-    _paths: readonly string[];
-    url(url: string, ...parameters: [`$${string}`, string][]): any;
+    _query?: Record<string, string | number | boolean | null | undefined> | undefined;
+    _params?: Record<`$${string}`, string> | undefined;
+    _paths?: readonly string[] | undefined;
+    _config?: Omit<RequestInit, "body" | "method" | "headers"> | undefined;
+    "__#1@#endpoint": string;
+    body(body: any): any;
+    config(config: Omit<RequestInit, "body" | "method" | "headers">): any;
     headers(...keyValuePairs: [string, string][]): any;
-    routes<T extends readonly string[]>(paths: readonly [...T]): import("./@types/object").DeepMerge<import("./@types/object").MergeAll<{ [I in keyof T]: T[I] extends infer T_1 ? T_1 extends T[I] ? T_1 extends `${infer H}/${infer R}` ? { [K in H]: R extends `${infer H}/${infer R}` ? any : { [K_1 in R]: {
-        _body: any;
-        _headers: Record<string, string>;
-        _params: Record<`$${string}`, string>;
-        body(body: any): any;
-        headers(keyValuePairs: [string, string][]): any;
-        get(...parameters: [`$${string}`, string][]): Promise<Response>;
-        post(...parameters: [`$${string}`, string][]): Promise<Response>;
-        put(...parameters: [`$${string}`, string][]): Promise<Response>;
-        patch(...parameters: [`$${string}`, string][]): Promise<Response>;
-        delete(...parameters: [`$${string}`, string][]): Promise<Response>;
-    }; }; } : { [K_2 in T_1]: {
-        _body: any;
-        _headers: Record<string, string>;
-        _params: Record<`$${string}`, string>;
-        body(body: any): any;
-        headers(keyValuePairs: [string, string][]): any;
-        get(...parameters: [`$${string}`, string][]): Promise<Response>;
-        post(...parameters: [`$${string}`, string][]): Promise<Response>;
-        put(...parameters: [`$${string}`, string][]): Promise<Response>;
-        patch(...parameters: [`$${string}`, string][]): Promise<Response>;
-        delete(...parameters: [`$${string}`, string][]): Promise<Response>;
-    }; } : never : never; }>, unknown>;
+    request(method: string): Promise<Response>;
+    routes<T extends readonly string[], S extends SplitCharacter = "/">(paths: readonly [...T], separator?: S): import("./@types/object").DeepMerge<import("./@types/object").MergeAll<{ [I in keyof T]: import("./@types/object").SegmentsToObject<T[I], import("./@types/object").Separator<S>, any>; }>, unknown>;
+    url(url: string, ...parameters: [`$${string}`, string][]): any;
+    get(...parameters: [`$${string}`, string][]): Promise<Response>;
+    post(...parameters: [`$${string}`, string][]): Promise<Response>;
+    put(...parameters: [`$${string}`, string][]): Promise<Response>;
+    patch(...parameters: [`$${string}`, string][]): Promise<Response>;
+    delete(...parameters: [`$${string}`, string][]): Promise<Response>;
 };
