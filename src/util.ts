@@ -134,6 +134,7 @@ export function browserDownloadBlob(
 export function http() {
   type KVPairs<K = string, V = string> = [K, V][];
   type Param<T extends string = string> = `\$${T}`;
+  type FetchConfig = Omit<NonNullable<Parameters<typeof fetch>[1]>, 'method' | 'body' | 'headers'>;
 
   function kvPairsToRecord<K extends string, V>(
     keyValuePairs: KVPairs<K, V>,
@@ -154,6 +155,7 @@ export function http() {
     _query?: Record<string, string | number | boolean | undefined | null>;
     _params?: Record<Param, string>;
     _paths?: readonly string[];
+    _config?: FetchConfig;
 
     #endpoint: string = '';
 
@@ -167,6 +169,7 @@ export function http() {
         this._query = instance._query;
         this._params = instance._params;
         this._paths = instance._paths;
+        this._config = instance._config;
       }
     }
 
@@ -175,19 +178,21 @@ export function http() {
       return this;
     }
 
+    config(config: FetchConfig) {
+      this._config = config;
+      return this;
+    }
+
     headers(...keyValuePairs: KVPairs) {
       this._headers = kvPairsToRecord(keyValuePairs, this._headers || {});
       return this;
     }
 
-    /* request(...args: Parameters<typeof fetch>) {
-    return fetch(...args);
-    } */
-
     request(method: string) {
       const { _baseUrl, _headers: headers, _body: body, _params } = this;
       const { baseUrl: url } = parseUrl([_baseUrl, this.#endpoint].join('/'), _params);
-      return fetch(url, { method, headers, body });
+      const config = this._config || {};
+      return fetch(url, { ...config, method, headers, body });
     }
 
     routes<T extends readonly string[], S extends SplitCharacter = '/'>(
