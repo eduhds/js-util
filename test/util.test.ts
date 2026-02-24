@@ -1,4 +1,11 @@
-import { bytesToSize, getCreditCardBrand, getRandomHexColor, http, isColorLight } from '../src';
+import {
+  bytesToSize,
+  generateUUID,
+  getCreditCardBrand,
+  getRandomHexColor,
+  http,
+  isColorLight
+} from '../src';
 
 describe('Module "util"', () => {
   test('Transform bytes to size', () => {
@@ -114,4 +121,11 @@ describe('Module "util"', () => {
       success: true
     });
   }, 20000);
+
+  test('Generate UUID v4', () => {
+    expect(generateUUID()).toHaveLength(36);
+    expect(generateUUID()).toMatch(
+      /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
+    );
+  });
 });

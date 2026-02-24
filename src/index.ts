@@ -59,7 +59,8 @@ export {
   isColorLight,
   getRandomHexColor,
   browserDownloadBlob,
-  http
+  http,
+  generateUUID
 } from './util';
 export {
   cepIsValid,

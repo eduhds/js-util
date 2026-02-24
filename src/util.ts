@@ -275,3 +275,24 @@ function accumulate<T extends object[]>(...arr: readonly [...T]): UnionToInterse
   ) as UnionToIntersection<T[number]>;
 }
  */
+
+/**
+ * Gera um UUID v4
+ *
+ * Importante:
+ *
+ * Math.random() não é seguro do ponto de vista criptográfico: é previsível.
+ * Se o uuid for usado para algo sensível (ex.: associar sessão, evitar replay, validação de segurança),
+ * essa implementação não é confiável e não deveria ser usada.
+ *
+ * @example
+ * // returns uuid like "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+ * generateUUID();
+ */
+export function generateUUID(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.floor(Math.random() * 16);
+    const v = c === 'x' ? r : (r % 4) + 8;
+    return v.toString(16);
+  });
+}
