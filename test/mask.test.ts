@@ -40,6 +40,10 @@ describe('Module "mask"', () => {
   test('Mask number', () => {
     expect(maskNumber('a1#$2/?3|xD45,oZ')).toBe('12345');
     expect(maskNumber('aa4s2s wf95sw ')).toBe('4295');
+    expect(maskNumber('ab12cd3')).toBe('123');
+    expect(maskNumber('abc-123')).toBe('-123');
+    expect(maskNumber('abc-123-456')).toBe('-123456');
+    expect(maskNumber('abc-123', false)).toBe('123');
   });
 
   test('Mask Credit Card', () => {
@@ -111,6 +115,11 @@ describe('Module "mask"', () => {
     expect(
       maskNumberDecimals('123456789', { decimals: 4, separator: '.', withThousands: true })
     ).toBe('12,345.6789');
+
+    expect(maskNumberDecimals('ab12cd3')).toBe('12,3');
+    expect(maskNumberDecimals('abc-123')).toBe('-12,3');
+    expect(maskNumberDecimals('abc-123-456', { decimals: 2 })).toBe('-1234,56');
+    expect(maskNumberDecimals('abc-123', { allowNegative: false })).toBe('12,3');
   });
 
   test('Mask password', () => {

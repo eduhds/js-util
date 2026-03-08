@@ -91,12 +91,49 @@ export function maskMoney(text: string) {
 
 /**
  * Return only numbers
+ * @param text - The input text
+ * @param allowNegative - Whether to allow negative numbers (default: true)
  * @example
  * // returns 123
  * maskNumber('ab12cd3')
+ *
+ * @example
+ * // returns -123
+ * maskNumber('abc-123')
+ *
+ * @example
+ * // returns -123456
+ * maskNumber('abc-123-456')
+ *
+ * @example
+ * // returns 123
+ * maskNumber('abc-123', false)
  */
-export function maskNumber(text: string) {
-  return text.replace(/\D/g, '');
+export function maskNumber(text: string, allowNegative: boolean = true) {
+  if (!allowNegative) {
+    return text.replace(/\D/g, '');
+  }
+
+  // Remove all non-digit characters except '-'
+  let result = text.replace(/[^\d-]/g, '');
+
+  // Keep only the first '-' if it's followed by a digit, remove others
+  let hasNegative = false;
+  result = result
+    .split('')
+    .filter((char, index) => {
+      if (char === '-') {
+        if (!hasNegative && index + 1 < result.length && /\d/.test(result[index + 1])) {
+          hasNegative = true;
+          return true;
+        }
+        return false;
+      }
+      return true;
+    })
+    .join('');
+
+  return result;
 }
 
 /**
@@ -126,12 +163,14 @@ export function maskCreditCard(text: string) {
  */
 export function maskNumberDecimals(
   text: string,
-  { decimals = 1, separator = ',', withThousands = false } = {}
+  { decimals = 1, separator = ',', withThousands = false, allowNegative = true } = {}
 ) {
   decimals = Math.max(decimals, 1);
   separator = [',', '.'].includes(separator) ? separator : ',';
 
   const delimiter = separator === ',' ? '.' : ',';
+
+  const hasNegative = allowNegative && maskNumber(text).startsWith('-');
 
   text = text
     .replace(/\D/g, '')
@@ -154,6 +193,11 @@ export function maskNumberDecimals(
     } else {
       text = withDelimiter(text);
     }
+  }
+
+  // Recolocar sinal negativo
+  if (hasNegative) {
+    text = '-' + text;
   }
 
   return text;
