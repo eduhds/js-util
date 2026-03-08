@@ -3,6 +3,6 @@ export { convertTimestampFromUnixEpoch, formatDateBR, formatTimeBR, getUnixEpoch
 export { maskCep, maskCnpj, maskCpf, maskCreditCard, maskDate, maskMoney, maskNumber, maskNumberDecimals, maskPhone, maskText, maskPassword } from './mask';
 export { keySelect, getValueAtPath, setValueAtPath, jsonToBlob, blobToJson, remapProperties, splitSegmentsToObjectFields, listObjectDeepKeys } from './object';
 export { capitalize, extensionFromFileName, fileNameFromPath, formatMoneyBR, formatPlacaOld, normalizeLower, numberFromText, titleize, parseUrl } from './string';
-export { bytesToSize, getCreditCardBrand, isColorLight, getRandomHexColor, browserDownloadBlob, http } from './util';
+export { bytesToSize, getCreditCardBrand, isColorLight, getRandomHexColor, browserDownloadBlob, http, generateUUID } from './util';
 export { cepIsValid, cnpjIsValid, cpfIsValid, cpfcnpjIsValid, emailIsValid, phoneIsValid, uuidIsValid } from './validate';
 export { parseFlexibleNumber } from './number';

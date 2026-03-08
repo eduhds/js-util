@@ -42,11 +42,25 @@ export declare function maskDate(text: string): string;
 export declare function maskMoney(text: string): string;
 /**
  * Return only numbers
+ * @param text - The input text
+ * @param allowNegative - Whether to allow negative numbers (default: true)
  * @example
  * // returns 123
  * maskNumber('ab12cd3')
+ *
+ * @example
+ * // returns -123
+ * maskNumber('abc-123')
+ *
+ * @example
+ * // returns -123456
+ * maskNumber('abc-123-456')
+ *
+ * @example
+ * // returns 123
+ * maskNumber('abc-123', false)
  */
-export declare function maskNumber(text: string): string;
+export declare function maskNumber(text: string, allowNegative?: boolean): string;
 /**
  * Mask Credit Card
  * @example
@@ -64,10 +78,11 @@ export declare function maskCreditCard(text: string): string;
  * // returns 1.000,00
  * maskNumberDecimals('100000', { decimals: 2, withThousands: true })
  */
-export declare function maskNumberDecimals(text: string, { decimals, separator, withThousands }?: {
+export declare function maskNumberDecimals(text: string, { decimals, separator, withThousands, allowNegative }?: {
     decimals?: number | undefined;
     separator?: string | undefined;
     withThousands?: boolean | undefined;
+    allowNegative?: boolean | undefined;
 }): string;
 /**
  * Mask text

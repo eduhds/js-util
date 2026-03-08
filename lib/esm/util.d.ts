@@ -65,3 +65,17 @@ export declare function http(): {
     patch(...parameters: [`$${string}`, string][]): Promise<Response>;
     delete(...parameters: [`$${string}`, string][]): Promise<Response>;
 };
+/**
+ * Gera um UUID v4
+ *
+ * Importante:
+ *
+ * Math.random() não é seguro do ponto de vista criptográfico: é previsível.
+ * Se o uuid for usado para algo sensível (ex.: associar sessão, evitar replay, validação de segurança),
+ * essa implementação não é confiável e não deveria ser usada.
+ *
+ * @example
+ * // returns uuid like "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+ * generateUUID();
+ */
+export declare function generateUUID(): string;

@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.16.0
+
+[compare changes](https://github.com/eduhds/js-util/compare/v2.15.0...v2.16.0)
+
+### 🚀 Enhancements
+
+- Add generateUUID ([c644d6b](https://github.com/eduhds/js-util/commit/c644d6b))
+- Allow negative numbers ([f55e523](https://github.com/eduhds/js-util/commit/f55e523))
+
+### ❤️ Contributors
+
+- Eduardo H. Da Silva ([@eduhds](http://github.com/eduhds))
+
 ## v2.15.0
 
 [compare changes](https://github.com/eduhds/js-util/compare/v2.14.2...v2.15.0)
